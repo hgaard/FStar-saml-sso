@@ -1,0 +1,2 @@
+module SamlProtocol
+	type AuthnRequest
