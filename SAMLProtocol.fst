@@ -1,2 +1,3 @@
 module SamlProtocol
-	type AuthnRequest
+	type nonce = string
+	type id :: nonce => *
