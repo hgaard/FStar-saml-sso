@@ -4,5 +4,4 @@ all: SamlProtocol
 
 SamlProtocol:
 	mkdir -p bin
-	fstar --genIL --writePrims --odir bin --dotnet4 SamlProtocol.fst	
-	fstar --genIL --writePrims --odir bin --dotnet4 SimpleCrypto.fst
+	fstar --genIL --writePrims --odir bin --dotnet4 simplecrypto.fst
