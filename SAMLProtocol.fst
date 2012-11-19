@@ -1,61 +1,52 @@
-(* One application of F* is to verify security properties of programs. 
+module PROTOCOL
 
-   This very simple example shows how refinement types can be used to 
-   verify access control policies on files in a decentralized way.  *)
+type uri = string
+type samlmessage = string
+type response
+type dsig
+type resource
 
-(* This module defines an API exposed by the file system to client programs. *)
-module FileSystem
-  (* The file system has some abstract type of files *)
-  type file       
+val requestResource: uri -> unit (* http GET *)
+val revcievehttpResponse: uri -> resource
+val sendhttpRedirect: uri -> bytes -> dsig -> string -> unit
+val recievehttpRedirect: uri -> (uri * samlmessage * dsig * string)
+val sendAuthnRequest: uri -> samlmessage -> dsig -> samlmessage -> unit
+val retrieveAutenticationRequestChallenge: uri -> string
+val sendAutenticationRequest: uri -> string -> string -> string -> unit
+val sendAuthentication: uri -> samlmessage -> string -> unit
 
-  (* a notion of user names *)
-  type user =
-    | U : string -> user
-    | Admin : user
+end (*PROTOCOL*)
 
-  (* and an abstract type of credentials for users.
-     cred u is the type of a credentialfor the user u. *)
-  type cred :: user => *
+module CLIENT
+open PROTOCOL
 
-  (* A user can try to authenticate itself to get a credential *)
-  val login : u:user -> pw:string -> option (cred u)
+val client: user:string -> password:string -> unit
+let client user password = 
+    requestResource "serviceproviderUrl" (*1*)
+    let (idp, authnRequest, sigSP, relayState) = recievehttpRedirect "serviceproviderUrl" (*2*)
+	    sendAuthnRequest idp authnRequest sigSP relayState (*3*)
+	    let challenge = retrieveAutenticationRequestChallenge idp (*4*)
+	    sendAutenticationRequest idp user password challenge (*5*)
+	    let (sp, samlResponse, sigIDP, relayState') = recievehttpRedirect idp (*6*)
+	    sendAuthentication sp, samlResponse, relayState' (*7*)
+    let res = revcievehttpResponse sp
+    ()
+end (*CLIENT*)
 
-  (* And a user can call fwrite to write a string to a file. 
-     But, the type of fwrite contains a refinement that says that
-     the user "u" must have the "CanWrite" privilege in order to 
-     write to "f" *)
-  type CanWrite :: user => file => P
-  val fwrite: u:user -> cred u -> f:file{CanWrite u f} -> string -> unit 
-end
 
-(*
-  Note: FileSystem itself does not contain any runtime checks to protect access to files. 
+module SERVICEPROVIDER
+open PROTOCOL
 
-   We can use the file system with different client programs 
-   by specifying suitable security policies, and implementing reference monitors 
-   suited to those security policies. 
-   
-   We can, of course, verify that the reference monitors implement the policy correctly. 
-*)
+(*  val id : string
+  val issueInstant : string
+  val destination : string
+  val issuer : string
+  val condition : string 
+  *)
+end (* SERVICEPROVIDER *)
 
-module ClientReferenceMonitor
-open FileSystem
+module IDENTITYPROVIDER
+open PROTOCOL
 
-(* A policy for this client: 
-   Can only write to a file if it has an Admin credential *)
-assume forall (u:user) (f:file). (CanWrite u f) <=> u=Admin
 
-(* This is a good implementation of the reference monitor.
-   It checks to make sure that it has an Admin credential *)
-val checked_fwrite: u:user -> cred u -> f:file -> unit
-let checked_fwrite u cred_u f = match u with
-  | Admin -> fwrite u cred_u f "Hello" 
-  | _ -> ()
-
-(* the next two lines give a bad implementation. 
-      --- any user u can use it to write to any file.
-   Uncomment it to see if F* complains *)
-
-(* val bad_fwrite: u:user -> cred u -> f:file -> unit *)
-(* let bad_fwrite u cred_u f = fwrite u cred_u f "Hello" *)
 end
