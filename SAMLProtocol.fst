@@ -36,6 +36,7 @@ end (*CLIENT*)
 
 module SERVICEPROVIDER
 open PROTOCOL
+open CLIENT
 
 (*  val id : string
   val issueInstant : string
