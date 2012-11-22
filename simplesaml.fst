@@ -1,15 +1,21 @@
 module PROTOCOL
 
 type prin = string
-type samlmessage = string
-type response
+type samlmessage = 
+    | request : samlmessage
+    | response : samlmessage
+
 type dsig
-type resource
+type status =
+    | Success : status
+    | Respoder : status
+    | Requester : status
 
 type Says :: prin => bytes => E
 
-val requestResource: prin -> unit (* http GET *)
+val requestResource: prin ->  unit (* http GET *)
 val recievehttpRedirect: prin -> prin
+val retrieveAutenticationRequestChallenge: prin -> string
 
 
 end (*PROTOCOL*)
@@ -18,26 +24,10 @@ module CLIENT
 open PROTOCOL
 
 val client: prin -> user:string -> password:string -> unit
-let client sp user password = 
+let client sp user password  = 
+    requestResource sp resource in assume(sp = sp)
+    let (idp, authnRequest, sigSP, relayState) = recievehttpRedirect sp 
+
     
-    let idp = recievehttpRedirect sp in requestResource sp
-    (*sendAuthnRequest idp authnRequest sigSP relayState (*3*)
-    let challenge = retrieveAutenticationRequestChallenge idp (*4*)
-    sendAutenticationRequest idp user password challenge (*5*)
-    let (sp, samlResponse, sigIDP, relayState') = recievehttpRedirect idp (*6*)
-    sendAuthentication sp, samlResponse, relayState' (*7*)
-    let res = revcievehttpResponse sp
-    ()*)
 end (*CLIENT*)
 
-
-module SERVICEPROVIDER
-open PROTOCOL
-open CLIENT
-end (* SERVICEPROVIDER *)
-
-module IDENTITYPROVIDER
-open PROTOCOL
-
-
-end

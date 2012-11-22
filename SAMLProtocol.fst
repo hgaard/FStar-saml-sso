@@ -1,34 +1,35 @@
 module PROTOCOL
 
-type uri = string
+type prin = string
 type samlmessage = string
 type response
 type dsig
 type resource
 
-val requestResource: uri -> unit (* http GET *)
-val revcievehttpResponse: uri -> resource
-val sendhttpRedirect: uri -> bytes -> dsig -> string -> unit
-val recievehttpRedirect: uri -> (uri * samlmessage * dsig * string)
-val sendAuthnRequest: uri -> samlmessage -> dsig -> samlmessage -> unit
-val retrieveAutenticationRequestChallenge: uri -> string
-val sendAutenticationRequest: uri -> string -> string -> string -> unit
-val sendAuthentication: uri -> samlmessage -> string -> unit
+val requestResource: prin -> unit (* http GET *)
+val revcievehttpResponse: prin -> resource
+val sendhttpRedirect: prin -> bytes -> dsig -> string -> unit
+val recievehttpRedirect: prin -> (prin * samlmessage * dsig * string)
+val sendAuthnRequest: prin -> samlmessage -> dsig -> samlmessage -> unit
+val retrieveAutenticationRequestChallenge: prin -> string
+val sendAutenticationRequest: prin -> string -> string -> string -> unit
+val sendAuthentication: prin -> samlmessage -> string -> unit
 
 end (*PROTOCOL*)
 
 module CLIENT
 open PROTOCOL
 
-val client: user:string -> password:string -> unit
-let client user password = 
-    requestResource "serviceproviderUrl" (*1*)
-    let (idp, authnRequest, sigSP, relayState) = recievehttpRedirect "serviceproviderUrl" (*2*)
-	    sendAuthnRequest idp authnRequest sigSP relayState (*3*)
-	    let challenge = retrieveAutenticationRequestChallenge idp (*4*)
-	    sendAutenticationRequest idp user password challenge (*5*)
-	    let (sp, samlResponse, sigIDP, relayState') = recievehttpRedirect idp (*6*)
-	    sendAuthentication sp, samlResponse, relayState' (*7*)
+val client: prin -> user:string -> password:string -> unit
+let client sp user password = 
+    let sp = sp in requestResource sp (*1*)
+    (*Insert protocol event*)
+    let (idp, authnRequest, sigSP, relayState) = recievehttpRedirect sp (*2*)
+    sendAuthnRequest idp authnRequest sigSP relayState (*3*)
+    let challenge = retrieveAutenticationRequestChallenge idp (*4*)
+    sendAutenticationRequest idp user password challenge (*5*)
+    let (sp, samlResponse, sigIDP, relayState') = recievehttpRedirect idp (*6*)
+    sendAuthentication sp, samlResponse, relayState' (*7*)
     let res = revcievehttpResponse sp
     ()
 end (*CLIENT*)

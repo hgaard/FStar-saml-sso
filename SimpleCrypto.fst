@@ -36,14 +36,12 @@ open UTIL
 val client: me:prin -> pubkey me -> privkey me 
          -> server:prin -> pubkey server -> unit
 let client me mypk mysk server serverpk = 
-   let req = string2bytes "Hi server" in 
-   assume (Says me req); (* Protocol event *)
-   let dsig = sign me mysk req in 
-   send server (req, dsig);
+   let req = string2bytes "Hi server" in assume (Says me req); (* protocol event *)
+   let dsig = sign me mysk req in send server (req, dsig);
    let (resp, dsig') = recv server in 
-   if verify server serverpk resp dsig'
-   then (assert (Says server resp); ())
-   else ()
+    if verify server serverpk resp dsig'
+    then (assert (Says server resp); ())
+    else ()
 
 end(* client *)
 
