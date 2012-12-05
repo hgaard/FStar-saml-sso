@@ -23,9 +23,11 @@ type serviceProvider(name) =
     member this.Name = name
     member this.idp = "idp"
     member this.Get resource = 
+        printfn "Generating new authnRequest in order to serve resource %s" resource
         new authnRequest(this.idp)
     member this.Post (message : response, relayState : string) = 
         let status = message.status
+        printfn "Saml response recieved from k"
         match status with
             | "Success" -> "Hello"
             | _ -> "fail"
