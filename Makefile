@@ -1,22 +1,14 @@
 MY_FSTAR_HOME=`cygpath "$(FSTAR_HOME)"`
+FSTAR=fstar --genIL --writePrims --odir bin --dotnet4 --parallel
+FSTAR_SRC= samlProtocol.fst client.fst serviceprovider.fst identityprovider.fst main.fst
 
-all: samlProtocol
+all: dirs samlProtocol
+
+dirs:
+	mkdir -p queries bin
 
 samlProtocol:
-	mkdir -p bin
-	fstar --genIL --writePrims --odir bin --dotnet4 --parallel samlProtocol.fst
-
-simple:
-	mkdir -p bin
-	fstar --genIL --writePrims --odir bin --dotnet4 --parallel simpleSaml.fst	
-
-crypto:
-	mkdir -p bin
-	fstar --genIL --writePrims --odir bin --dotnet4 --parallel simplecrypto.fst
-
-test:
-	mkdir -p bin
-	fstar --genIL --writePrims --odir bin --dotnet4 --parallel test.fst	
+	$(FSTAR) $(FSTAR_SRC)
 
 clean:
-	rm -rf bin
+	rm -rf bin queries
