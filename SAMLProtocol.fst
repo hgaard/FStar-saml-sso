@@ -14,19 +14,27 @@ type samlmessage =
   | AuthnRequest: samlmessage
   | Response: samlmessage
 
+type SamlStatus =
+	| Success: SamlStatus
+	| Requester: SamlStatus
+	| Responder: SamlStatus
+
 type message =
   | HttpGet: uri -> message
   | SamlProtocolMessage: prin -> samlmessage -> dsig -> string -> message
   | Credentials: string -> string -> nonce -> message
   | Challenge: nonce -> message
   | Resource: uri -> message
-  | Failed: message
+  | Failed: int -> message
 
 val send: prin -> message -> unit
 val recieve: prin -> message 
 
-val createAuthnRequest: prin -> prin -> (samlmessage * dsig)
-val createChallenge: prin -> nonce
-val createSamlResponse: prin -> prin -> (samlmessage * dsig)
+val CreateAuthnRequest: prin -> prin -> (samlmessage * dsig)
+val CreateChallenge: prin -> nonce
+val CreateSamlResponse: prin -> prin -> SamlStatus -> (samlmessage * dsig)
+
+(*Verification*)
+type Log :: prin => samlmessage => E
 
 end (*Protocol*)
