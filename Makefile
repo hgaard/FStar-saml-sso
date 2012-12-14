@@ -10,5 +10,9 @@ dirs:
 samlProtocol:
 	$(FSTAR) $(FSTAR_SRC)
 
+
+crypto:
+	$(FSTAR) simplecrypto.fst	
+
 clean:
 	rm -rf bin queries

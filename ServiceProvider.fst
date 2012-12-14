@@ -1,5 +1,5 @@
-module SERVICEPROVIDER
-open PROTOCOL
+module Serviceprovider
+open Protocol
 
 (*
 - Protocol events
@@ -9,16 +9,20 @@ open PROTOCOL
 
 val serviceprovider: me:prin -> client:prin -> idp:prin -> unit 
 let serviceprovider me client idp = 
-  let reqUri = recieve client
-  match reqUri with
-  | patt -> expr
-  | _ -> expr2
+  let reqRes = recieve client in (*1*)
+  match reqRes with
+  | HttpGet (uri) -> 
+	let (authnReq, sigSP)  = createAuthnRequest me idp in 
+  	let authnReqest = SamlProtocolMessage idp authnReq sigSP "relay" in 
+  	send client authnReqest; (*2*)
+  	let authResponse = recieve client in (*7*)
+  	match authResponse with
+  	| SamlProtocolMessage (sp, message, sigIDP, relay) -> 
+  		let resource = Resource uri in
+  		send client resource	(*8*)
+  	| _ ->  ()
+  | _ -> ()
 
-  (*let reqUri = recieveHttpRequest client in (*1*)
-    let (authnReq, sigSP)  = createAuthnRequest me idp in 
-      sendAuthnRequest client authnReq sigSP "relay"; (*2*)
-      let (sp, samlResponse, sigIDP, relay) = recievehttpRedirect client in (*7*)
-        sendResource client; (*8*)*)
-        ()
+  ()
 
-end (* SERVICEPROVIDER *)
+end (* Serviceprovider *)

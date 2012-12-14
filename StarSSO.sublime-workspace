@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"re",
+				"relayState"
+			],
+			[
+				"use",
+				"authUserReq"
+			],
+			[
+				"chal",
+				"challenge"
+			],
+			[
+				"ca",
+				"chal"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"r",
+				"req"
+			],
+			[
+				"Fs",
+				"FSTAR_SRC"
+			],
+			[
 				"recieveAutenticationc",
 				"recieveAutenticationCredentials"
 			],
@@ -36,10 +64,6 @@
 				"recieveAutenticationRequest"
 			],
 			[
-				"re",
-				"relay"
-			],
-			[
 				"sam",
 				"samlResponse"
 			],
@@ -68,13 +92,26 @@
 	"buffers":
 	[
 		{
-			"contents": "module PROTOCOL\n\ntype prin\ntype samlmessage\ntype response\ntype dsig\ntype resource\ntype uri\n\nval createAuthnRequest: prin -> prin -> (samlmessage * dsig)\nval createChallenge: prin -> string\nval createSamlResponse: prin -> prin -> (samlmessage * dsig)\n\nval recieveHttpRequest: prin -> uri\nval recieveHttpResponse: prin -> resource\nval recieveAutenticationRequestChallenge: prin -> string\nval recieveAutenticationRequest: prin -> (string * string * string)\nval recieveAutenticationCredentials: prin -> (samlmessage * dsig * string)\nval recievehttpRedirect: prin -> (prin * samlmessage * dsig * string)\n\nval sendRequestResource: prin -> unit\nval sendhttpRedirect: prin -> prin -> samlmessage -> dsig -> string -> unit\nval sendAuthnRequest: prin -> samlmessage -> dsig -> string -> unit\nval sendAutenticationRequest: prin -> string -> string -> string -> unit\nval sendAutenticationChallenge: prin -> string -> uni t\nval sendAuthentication: prin -> samlmessage -> string -> unit\nval sendResource: prin -> resource\n\nend (*PROTOCOL*)\n\nmodule CLIENT\nopen PROTOCOL\n\n(*\n- Protocol events\n- Add assumtions\n- Add asserts\n  *)\n\nval client: me:prin -> user:string -> password:string -> unit\nlet client sp user password = \n    let _ = sendRequestResource sp in(*1*)\n      let (idp, authnRequest, sigSP, relayState) = recievehttpRedirect sp in(*2*)\n        sendAuthnRequest idp authnRequest sigSP relayState;(*3*)\n        let challenge = recieveAutenticationRequestChallenge idp in(*4*)\n          sendAutenticationRequest idp user password challenge; (*5*)\n          let (sp', samlResponse, sigIDP, relayState') = recievehttpRedirect idp in(*6*)\n            sendAuthentication sp' samlResponse relayState'; (*7*)\n            let res = recieveHttpResponse sp' in (*8*)\n            ()\nend (*CLIENT*)\n\n\nmodule SERVICEPROVIDER\nopen PROTOCOL\n\n(*\n- Protocol events\n- Add assumtions\n- Add asserts\n*)\n\nval serviceprovider: me:prin -> client:prin -> idp:prin -> unit \nlet serviceprovider me client idp = \n  let reqUri = recieveHttpRequest client in (*1*)\n    let (authnReq, sigSP)  = createAuthnRequest me idp in \n      sendAuthnRequest client authnReq sigSP \"relay\"; (*2*)\n      let (sp, samlResponse, sigIDP, relay) = recievehttpRedirect client in (*7*)\n        sendResource client; (*8*)\n        ()\n\nend (* SERVICEPROVIDER *)\n\nmodule IDENTITYPROVIDER\nopen PROTOCOL\n\n(*\n- Protocol events\n- Add assumtions\n- Add asserts\n*)\n\nval identityprovider: me:prin -> client:prin -> sp:prin -> unit\nlet identityprovider me client serviceprovider =\n  let (authnReq, sigSP, relay) = recieveAutenticationRequest client in (*3*)\n    let challenge = createChallenge client in\n      sendAutenticationChallenge client challenge; (*4*)\n      let (user,password, challenge') = recieveAutenticationCredentials client in (*5*)\n        let (samlResponse, sigIDP) = createSamlResponse me serviceprovider in \n          sendhttpRedirect client serviceprovider samlResponse sigIDP; (*6*)\n          ()\n\nend (*IDENTITYPROVIDER*)\n",
-			"file": "SAMLProtocol.fst",
-			"file_size": 3067,
-			"file_write_time": 129992952749690136,
+			"file": "main.fst",
 			"settings":
 			{
-				"buffer_size": 2975,
+				"buffer_size": 212,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ServiceProvider.fst",
+			"settings":
+			{
+				"buffer_size": 519,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "identityprovider.fst",
+			"settings":
+			{
+				"buffer_size": 671,
 				"line_ending": "Windows"
 			}
 		},
@@ -82,15 +119,15 @@
 			"file": "Makefile",
 			"settings":
 			{
-				"buffer_size": 474,
+				"buffer_size": 350,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "HigherOrder.fst",
+			"file": "client.fst",
 			"settings":
 			{
-				"buffer_size": 2129,
+				"buffer_size": 1612,
 				"line_ending": "Windows"
 			}
 		},
@@ -101,14 +138,26 @@
 				"buffer_size": 1868,
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": "SAMLProtocol.fst",
+			"settings":
+			{
+				"buffer_size": 1576,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 81.0,
+		"height": 380.0,
 		"selected_items":
 		[
+			[
+				"git d",
+				"Git: Diff Current File"
+			],
 			[
 				"pac",
 				"Package Control: Install Package"
@@ -244,6 +293,12 @@
 	"file_history":
 	[
 		"/C/Users/jbhq/Desktop/AttributeQueryVirkRequest",
+		"/C/Speciale/code/StarProtocol/protocolsignatures.fst",
+		"/C/Speciale/code/StarProtocol/HigherOrder.fst",
+		"/C/Speciale/code/StarProtocol/messages.fst",
+		"/C/Speciale/code/StarProtocol/identityprovider",
+		"/C/Speciale/code/StarProtocol/StarSSO.sublime-project",
+		"/C/Speciale/code/StarProtocol/StarSSO.sublime-workspace",
 		"/C/Windows/System32/Drivers/etc/hosts",
 		"/C/Speciale/code/StarProtocol/SimpleCrypto.fst",
 		"/C/Users/jbhq/SkyDrive/Documents/netværkskode.txt",
@@ -371,9 +426,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -381,6 +437,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"response",
 			"uri",
 			"metadata",
 			"print",
@@ -405,51 +462,101 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "SAMLProtocol.fst",
+					"file": "main.fst",
 					"settings":
 					{
-						"buffer_size": 2975,
+						"buffer_size": 212,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								909,
-								909
+								168,
+								168
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/OCaml/OCaml.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/OCaml/OCaml.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 456.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "Makefile",
+					"file": "ServiceProvider.fst",
 					"settings":
 					{
-						"buffer_size": 474,
+						"buffer_size": 519,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								327,
+								327
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/OCaml/OCaml.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "identityprovider.fst",
+					"settings":
+					{
+						"buffer_size": 671,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/OCaml/OCaml.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Makefile",
+					"settings":
+					{
+						"buffer_size": 350,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								285,
+								285
 							]
 						],
 						"settings":
@@ -463,19 +570,53 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "HigherOrder.fst",
+					"buffer": 4,
+					"file": "client.fst",
 					"settings":
 					{
-						"buffer_size": 2129,
+						"buffer_size": 1612,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								481,
-								481
+								1040,
+								1040
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/OCaml/OCaml.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 72.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "SimpleCrypto.fst",
+					"settings":
+					{
+						"buffer_size": 1868,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								151,
+								151
 							]
 						],
 						"settings":
@@ -489,37 +630,31 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 3,
-					"file": "SimpleCrypto.fst",
+					"buffer": 6,
+					"file": "SAMLProtocol.fst",
 					"settings":
 					{
-						"buffer_size": 1868,
+						"buffer_size": 1576,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								324,
-								324
+								1323,
+								1323
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/F#/F#.tmLanguage",
+							"syntax": "Packages/OCaml/OCaml.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 150.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -555,7 +690,7 @@
 		"cols":
 		[
 			0.0,
-			0.587403598972,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -588,6 +723,22 @@
 		"selected_items":
 		[
 			[
+				"mai",
+				"main.fst"
+			],
+			[
+				"clie",
+				"client.fst"
+			],
+			[
+				"cl",
+				"client.fst"
+			],
+			[
+				"assert",
+				"StarSSO.sublime-project"
+			],
+			[
 				"ann",
 				"/C/Speciale/FStar/examples/healthweb-azure/prin.fine"
 			]
@@ -606,6 +757,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 124.0,
+	"side_bar_width": 136.0,
 	"status_bar_visible": true
 }

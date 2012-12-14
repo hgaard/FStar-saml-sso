@@ -1,6 +1,6 @@
-module MAIN
-open PROTOCOL
-open CLIENT
+module Main
+open Protocol
+open Client
 
 val main: sp:prin -> res:uri -> user:string -> password:string -> unit
 let main sp resource user password = 
