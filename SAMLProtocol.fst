@@ -35,6 +35,6 @@ val CreateChallenge: prin -> nonce
 val CreateSamlResponse: prin -> prin -> SamlStatus -> (samlmessage * dsig)
 
 (*Verification*)
-type Log :: prin => samlmessage => E
+type Log :: prin => string => E
 
 end (*Protocol*)

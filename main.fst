@@ -1,3 +1,4 @@
+#light
 module Main
 open Protocol
 open Client
