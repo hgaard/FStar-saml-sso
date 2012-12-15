@@ -17,7 +17,7 @@ let identityprovider me client serviceprovider =
     
 
     let challenge = CreateChallenge client in
-    assert (Log serviceprovider relay );
+    (*assert (Log serviceprovider relay );*)
     let challengeMessage = Challenge challenge in
     send client challengeMessage; (*4*)
     

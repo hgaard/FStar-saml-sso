@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpNemlogIn", "FSharpNemlogIn\FSharpNemlogIn.fsproj", "{67B41CA2-C657-4B9B-B797-061E9E7C3F03}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpNemlogIn", "FSharpNemlogIn\FSharpNemlogIn\FSharpNemlogIn.fsproj", "{67B41CA2-C657-4B9B-B797-061E9E7C3F03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
