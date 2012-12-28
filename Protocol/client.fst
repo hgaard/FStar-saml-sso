@@ -9,6 +9,7 @@ open Protocol
 
 val client: sp:prin -> req:message -> user:string -> password:string -> message
 let client sp req user password = 
+    print_string "Entering Client (sending request)";
     let _ = send sp req in(*1*)
       let res = recieve sp in(*2*)
         match res with
@@ -17,7 +18,7 @@ let client sp req user password =
           send idp samlAuthnReq;
           let chal = recieve idp in (*4*)
           match chal with
-          | Challenge (challenge) -> 
+          | ChallengeMessage (challenge) -> 
             let authUserReq = Credentials user password challenge in (*5*)
             send idp authUserReq; (*5*)
             let idpResp = recieve idp in
