@@ -18,6 +18,9 @@ test:
 	cp $(MY_FSTAR_HOME)/bin/*.dll bin/
 	(cd bin; ./do.exe "jojoda")
 
+basic:
+	$(FSTAR) basic-example.fst	
+
 crypto:
 	$(FSTAR) cryptoexample.fst	
 

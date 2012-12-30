@@ -15,18 +15,18 @@ type samlmessage =
   | AuthnRequest: samlmessage
   | Response: samlmessage
 
-type SamlStatus =
-	| Success: SamlStatus
-	| Requester: SamlStatus
-	| Responder: SamlStatus
-
 type message =
   | HttpGet: uri -> message
-  | SamlProtocolMessage: prin -> samlmessage -> dsig -> string -> message
+  | SamlProtocolMessage: prin -> samlmessage -> dsig -> message
   | Credentials: string -> string -> nonce -> message
   | ChallengeMessage: nonce -> message
   | Resource: uri -> message
   | Failed: int -> message
+
+type SamlStatus =
+  | Success: SamlStatus
+  | Requester: SamlStatus
+  | Responder: SamlStatus
 
 (*Verification*)
 type Log :: prin => samlmessage => E

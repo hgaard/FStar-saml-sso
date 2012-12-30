@@ -8,8 +8,8 @@ let browser sp resource user password =
     let _ = send sp req in(*1*)
       let res = recieve sp in(*2*)
         match res with
-        | SamlProtocolMessage (idp, authnRequest, sigSP, relayState) -> 
-          let samlAuthnReq = SamlProtocolMessage idp authnRequest sigSP relayState in
+        | SamlProtocolMessage (idp, authnRequest, sigSP) -> 
+          let samlAuthnReq = SamlProtocolMessage idp authnRequest sigSP in
           send idp samlAuthnReq;
           let chal = recieve idp in (*4*)
           match chal with
@@ -18,8 +18,8 @@ let browser sp resource user password =
             send idp authUserReq; (*5*)
             let idpResp = recieve idp in
             match idpResp with
-            | SamlProtocolMessage (sp', samlResponse, sigIDP, relayState') -> 
-              let samlResponseRequest =  SamlProtocolMessage sp' samlResponse sigIDP relayState' in (*7*)
+            | SamlProtocolMessage (sp', samlResponse, sigIDP) -> 
+              let samlResponseRequest =  SamlProtocolMessage sp' samlResponse sigIDP in (*7*)
               send sp' samlResponseRequest;
               recieve sp'; () (*8*)
             | _ -> idpResp; () (*Report response back to caller*)
