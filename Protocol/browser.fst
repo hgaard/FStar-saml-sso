@@ -1,15 +1,10 @@
-module Client
+module Browser
 open Protocol
 
-(*
-- Protocol events
-- Add assumtions
-- Add asserts
-  *)
-
-val client: sp:prin -> req:message -> user:string -> password:string -> message
-let client sp req user password = 
+val browser: sp:prin -> res:uri -> user:string -> password:string -> unit
+let browser sp resource user password = 
     print_string "Entering Client (sending request)";
+    let req = HttpGet resource in
     let _ = send sp req in(*1*)
       let res = recieve sp in(*2*)
         match res with
@@ -26,9 +21,7 @@ let client sp req user password =
             | SamlProtocolMessage (sp', samlResponse, sigIDP, relayState') -> 
               let samlResponseRequest =  SamlProtocolMessage sp' samlResponse sigIDP relayState' in (*7*)
               send sp' samlResponseRequest;
-              recieve sp' (*8*)
-            | _ -> idpResp (*Report response back to caller*)
-          | _ -> chal (*Report response back to caller*)
-        | _ -> res (*Report response back to caller*)
-
-end (*Client*)
+              recieve sp'; () (*8*)
+            | _ -> idpResp; () (*Report response back to caller*)
+          | _ -> chal; () (*Report response back to caller*)
+        | _ -> res; () (*Report response back to caller*)

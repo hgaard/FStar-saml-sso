@@ -1,19 +1,10 @@
 module Serviceprovider
 open Protocol
 
-(*
-- Protocol events
-- Add assumtions
-- Add asserts
-- Fork
-*)
-
-val serviceprovider: me:prin -> client:prin -> idp:prin -> pubkey idp -> unit 
-let serviceprovider me client idp pubkidp = 
-    (* Generate keypair *)
-  let pubk, privk = keygen me in
-
-    let reqRes = recieve client in (*1*)
+val serviceprovider:  me:prin -> pubkey me -> privkey me ->
+                      client:prin -> idp:prin -> pubkey idp -> unit 
+let serviceprovider me pubk privk client idp pubkidp = 
+  let reqRes = recieve client in (*1*)
   match reqRes with
   | HttpGet (uri) -> 
   

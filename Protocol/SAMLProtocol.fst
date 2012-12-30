@@ -1,10 +1,5 @@
 module Protocol
 
-(*TODO: 
-- Gør beskrder endnu mere generelle
-- Så de afspejler http og model bedre 
-- Lave simple implementeringer af ikke implementerede interfaces (skriv string)
-*)
 type prin = string
 type pubkey :: prin => *
 type privkey :: prin => *
@@ -54,6 +49,4 @@ val createAuthnRequest: sp:prin -> idp:prin -> samlmessage
 val createChallenge: prin -> nonce
 val createSamlResponse: prin -> prin -> SamlStatus -> samlmessage
 
-
-
-end (*Protocol*)
+val fork: list (unit -> unit) -> unit

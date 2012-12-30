@@ -1,18 +1,10 @@
 module Identityprovider
 open Protocol
 
-(*
-- Protocol events
-- Add assumtions
-- Add asserts
-*)
-
-val identityprovider: me:prin -> client:prin -> sp:prin -> pubkey sp -> unit
-let identityprovider me client serviceprovider pubksp =
+val identityprovider: me:prin -> pubkey me -> privkey me ->
+                      client:prin -> sp:prin -> pubkey sp -> unit
+let identityprovider me pubk privk client serviceprovider pubksp =
 	
-  (* Generate keypair *)
-  let pubk, privk = keygen me in
-
   let authRequest = recieve client in (*3*)
 	match authRequest with
 	| SamlProtocolMessage (idp, message, sigSP, relay)->  
@@ -44,5 +36,3 @@ let identityprovider me client serviceprovider pubksp =
      let sigIDP = sign me privk samlresponse in
      let response = SamlProtocolMessage serviceprovider samlresponse sigIDP "" in
      send client response (*4.1*)
-
-end (*Identityprovider*)
