@@ -3,17 +3,11 @@ module Protocol
 type prin = string
 type pubkey :: prin => *
 type privkey :: prin => *
-type dsig
+type dsig = string
 type resource = bytes
 type uri = string
-type nonce
-
-val keygen:  p:prin
-          -> (pubkey p * privkey p)
-
-type samlmessage =
-  | AuthnRequest: samlmessage
-  | Response: samlmessage
+type nonce = string (*How to secure uniqueness? P-kind?*)
+type samlmessage = string
 
 type message =
   | HttpGet: uri -> message
@@ -30,23 +24,37 @@ type SamlStatus =
 
 (*Verification*)
 type Log :: prin => samlmessage => E
+type Log2 :: string => string => nonce => E
 
-val sign:  p:prin
+(*Crypto functions*)
+val Keygen:  p:prin
+          -> (pubkey p * privkey p)
+
+val Sign:  p:prin
         -> privkey p
         -> msg:samlmessage{Log p msg}
         -> dsig
 
-val verify: p:prin
+val VerifySignature: p:prin
         -> pubkey p 
         -> msg:samlmessage
         -> dsig
         -> b:bool{b=true ==> Log p msg}
 
-val send: prin -> message -> unit
-val recieve: prin -> message 
+val AuthenticateUser: user:string
+        -> password:string
+        -> challenge:nonce
+        -> b:bool{b=true ==> Log2 user password challenge}
 
-val createAuthnRequest: sp:prin -> idp:prin -> samlmessage
-val createChallenge: prin -> nonce
-val createSamlResponse: prin -> prin -> SamlStatus -> samlmessage
+val Send: prin -> message -> unit
+val Recieve: prin -> message 
 
-val fork: list (unit -> unit) -> unit
+(*Saml functions*)
+extern reference Saml {language="F#";
+            dll="Saml";
+            namespace="";
+            classname="Saml"}
+
+extern Saml val CreateAuthnRequest: sp:prin -> idp:prin -> samlmessage
+extern Saml val CreateChallenge: prin -> nonce
+extern Saml val CreateSamlResponse: idp:prin -> sp:prin -> SamlStatus -> samlmessage

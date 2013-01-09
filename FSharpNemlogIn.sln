@@ -11,6 +11,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LoginServerWebApp", "FSharp
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LoginServerWebAppTests", "FSharpNemlogIn\LoginServer\LoginServerWebAppTests\LoginServerWebAppTests.fsproj", "{25102AF8-150F-4BA6-B519-E3FD5A70FC2C}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Network", "FSharpNemlogIn\Netw\Network.fsproj", "{97623325-D541-453D-84D8-FDC27FA5EA7D}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Saml", "Saml\Saml.fsproj", "{6A9A0D0B-A25B-4CF6-8816-C78F12900D0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,14 @@ Global
 		{25102AF8-150F-4BA6-B519-E3FD5A70FC2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25102AF8-150F-4BA6-B519-E3FD5A70FC2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25102AF8-150F-4BA6-B519-E3FD5A70FC2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97623325-D541-453D-84D8-FDC27FA5EA7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97623325-D541-453D-84D8-FDC27FA5EA7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97623325-D541-453D-84D8-FDC27FA5EA7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97623325-D541-453D-84D8-FDC27FA5EA7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A9A0D0B-A25B-4CF6-8816-C78F12900D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A9A0D0B-A25B-4CF6-8816-C78F12900D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A9A0D0B-A25B-4CF6-8816-C78F12900D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A9A0D0B-A25B-4CF6-8816-C78F12900D0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
