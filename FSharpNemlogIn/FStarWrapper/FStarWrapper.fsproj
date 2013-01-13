@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CryptoTest.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>
@@ -89,6 +90,11 @@
     <ProjectReference Include="..\..\Saml\Saml.fsproj">
       <Name>Saml</Name>
       <Project>{6a9a0d0b-a25b-4cf6-8816-c78f12900d0a}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Crypto\Crypto.fsproj">
+      <Name>Crypto</Name>
+      <Project>{8600d657-b1db-453d-ad81-0fc9da5cf7b3}</Project>
       <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\Netw\Network.fsproj">

@@ -24,6 +24,7 @@ let CreateSendAndRecieve sp idp =
 	let status = SendX sp "GET" "query=Somevalue" "cookei=somevalue" "body" in
 	match status with
 	| Success -> print_string "great!";
-		let resp = RecieveX sp in 
-			print_string resp; ()
+		let (resp, cookie) = RecieveX sp in 
+			print_string resp;
+			print_string cookie;()
 	| _ -> print_string "crap!";()

@@ -11,5 +11,5 @@ extern reference Network {language="F#";
 						namespace="";
 						classname="Network"}
 extern Network val SendX: prin -> method -> queryparams -> cookies -> messagebody -> SamlStatus
-extern Network val RecieveX: prin -> string 
+extern Network val RecieveX: prin -> (string * string)
 extern Network val CreateSamlProtocolMessage: samlmessage -> dsig -> string
