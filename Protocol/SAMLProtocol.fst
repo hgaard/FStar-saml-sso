@@ -8,6 +8,7 @@ type resource = bytes
 type uri = string
 type nonce = string (*How to secure uniqueness? P-kind?*)
 type samlmessage = string
+type assertion = string
 
 type message =
   | HttpGet: uri -> message
@@ -30,6 +31,7 @@ type Log2 :: string => string => nonce => E
 val Keygen:  p:prin
           -> (pubkey p * privkey p)
 
+
 val Sign:  p:prin
         -> privkey p
         -> msg:samlmessage{Log p msg}
@@ -49,12 +51,25 @@ val AuthenticateUser: user:string
 val Send: prin -> message -> unit
 val Recieve: prin -> message 
 
+(*Crypto functions*)
+extern reference Crypto {language="F#";
+            dll="Crypto";
+            namespace="";
+            classname="Crypto"}
+
+extern Crypto val KeyGenExt: p:prin
+          -> (string * string)
+
+
 (*Saml functions*)
 extern reference Saml {language="F#";
             dll="Saml";
             namespace="";
             classname="Saml"}
 
-extern Saml val CreateAuthnRequest: sp:prin -> idp:prin -> samlmessage
+extern Saml val CreateAuthnRequest: issuer:prin -> destination:prin -> samlmessage
 extern Saml val CreateChallenge: prin -> nonce
-extern Saml val CreateSamlResponse: idp:prin -> sp:prin -> SamlStatus -> samlmessage
+extern Saml val CreateSamlAssertion: user:string -> issuer:prin -> destination:prin -> assertion
+extern Saml val CreateSamlResponse: issuer:prin -> destination:prin -> assertion -> samlmessage
+extern Saml val CreateSamlFailedResponse: issuer:prin -> destination:prin -> SamlStatus -> samlmessage
+

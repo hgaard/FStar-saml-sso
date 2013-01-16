@@ -7,7 +7,7 @@ open Crypto
 let TestCrypto = 
     let spid = "https://saml.serviceprovicer.org"
     let idpid = "https://saml.identityprovicer.org"
-    let (privk, pubk) = KeyGen spid
+    let (privk, pubk) = KeyGenExt spid
     
     let msg = X.GetReq spid idpid
     printfn "Message to sign %s" msg

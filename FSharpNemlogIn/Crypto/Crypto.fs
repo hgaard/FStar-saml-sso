@@ -17,7 +17,7 @@ let WriteKeyToFile (filename:string) (key:string) =
     let file = File.CreateText(fn)
     file.Write key |>  file.Close
 
-let KeyGen prin : (string * string) = 
+let KeyGenExt prin : (string * string) = 
     let cspParams = new CspParameters()
     cspParams.ProviderType <- 1
     cspParams.Flags <- CspProviderFlags.UseArchivableKey

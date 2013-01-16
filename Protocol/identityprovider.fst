@@ -16,25 +16,23 @@ let identityprovider me pubk privk browser serviceprovider pubksp =
       let challenge = CreateChallenge browser in
   
       let challengeMessage = ChallengeMessage challenge in
-      Send browser challengeMessage; (*4*)
-      let credentials = Recieve browser in (*5*)
-      match credentials with
-        | Credentials(user, password, challenge') -> 
+      Send browser challengeMessage (*4*))
+     else Send browser (Failed (400))(*4.1*)
+     
+  | Credentials(user, password, challenge') -> 
 
-        (*Check credentials and challenge*)
-        if AuthenticateUser user password challenge'
-        then
-          (assert (Log2 user password challenge');
+    (*Check credentials and challenge*)
+    if AuthenticateUser user password challenge'
+    then
+      (assert (Log2 user password challenge');
 
-          let samlresponse = CreateSamlResponse me serviceprovider Success in
-          assume(Log me samlresponse);
-          let sigIDP = Sign me privk samlresponse in 
-          let response = SamlProtocolMessage serviceprovider samlresponse sigIDP in
-          Send browser response(*6*))
-        else Send browser (Failed (400))
-  
-        | _ -> Send browser (Failed (400)))(*6.3*)
-    else Send browser (Failed (400))
+      let samlresponse = CreateSamlResponse me serviceprovider Success in
+      assume(Log me samlresponse);
+      let sigIDP = Sign me privk samlresponse in 
+      let response = SamlProtocolMessage serviceprovider samlresponse sigIDP in
+      Send browser response(*6*))
+    else Send browser (Failed (400))(*6.3*)
+
   | _ -> 
      let samlresponse = CreateSamlResponse me serviceprovider Requester in
      assume(Log me samlresponse);

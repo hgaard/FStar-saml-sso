@@ -7,11 +7,27 @@ val GetReq: prin -> prin -> samlmessage
 let GetReq sp idp = 
 	CreateAuthnRequest sp idp
 
+val GetSamlMessages: prin -> prin -> string
+let GetSamlMessages sp idp = 
+	print_string "Getting AuthReq\n";
+	let req = CreateAuthnRequest sp idp in
+	print_string req;
+	(*print_string "\nGetting Challenge\n";
+	let challenge = CreateChallenge sp in
+	print_string challenge;*)
+	print_string "\nGetting Assertion\n";
+	let assertion = CreateSamlAssertion "me" idp sp in
+	print_string assertion;
+	print_string "\nGetting Response\n";
+	let response = CreateSamlResponse idp sp assertion in
+	print_string response;
+	"Done"
+
 val CreateAndSend: prin -> prin ->unit
 let CreateAndSend sp idp =
 	let authReq = CreateAuthnRequest sp idp in
 	let req = SamlProtocolMessage sp authReq "sig" in
-	let status = SendX sp "GET" "query=Somevalue" "cookei=somevalue" "body" in
+	let status = SendX sp req in
 	match status with
 	| Success -> print_string "great!";()
 	| _ -> print_string "crap!";()
@@ -21,10 +37,12 @@ val CreateSendAndRecieve: prin -> prin ->unit
 let CreateSendAndRecieve sp idp =
 	let authReq = CreateAuthnRequest sp idp in
 	let req = SamlProtocolMessage sp authReq "sig" in
-	let status = SendX sp "GET" "query=Somevalue" "cookei=somevalue" "body" in
+	let status = SendX sp req in
 	match status with
 	| Success -> print_string "great!";
-		let (resp, cookie) = RecieveX sp in 
-			print_string resp;
-			print_string cookie;()
+		let msg = RecieveX sp in
+		match msg with
+		| HttpGet (url) -> 
+			print_string url;()
 	| _ -> print_string "crap!";()
+

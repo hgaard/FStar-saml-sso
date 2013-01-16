@@ -1,17 +1,17 @@
 ﻿module Network
-open System.Diagnostics.Contracts
 
-let fo param = 
-    param |> List.fold (fun r s -> r+ ";" + s) ""
+let SendX (prin:string) (msg:Protocol.message) = 
+    match msg with
+    | :? Protocol.SamlProtocolMessage -> 
+        let samlmsg = (msg :?> Protocol.SamlProtocolMessage).field_2
+        printfn "Message %s\nrecieved from %s" samlmsg prin
+    | _ -> printfn "Message from: %s not valid" prin 
     
-
-let SendX (prin:string) (methodId:string)  (query:string) (cookies:string) (msg:string) = 
-//    let q = fo query
-//    let c = fo cookies
-    printfn "Message sent to: %s on %s with payload: %s and query:%s and Cookies:%s" prin methodId msg query cookies
     Protocol.Success() :> Protocol.SamlStatus
 
-let RecieveX (prin:string) : (string*string)=
-    ("Sending response:" + "I have recieved your request and this is my response" + " to: " +  prin, "cookie")
-    
-
+let RecieveX (prin:string) : (Protocol.message) =
+    match prin with
+    | "sp" ->  Protocol.HttpGet "This is a sp reply" :> Protocol.message
+    | "idp" -> Protocol.HttpGet "This is a idp reply" :> Protocol.message
+    | "browser" -> Protocol.HttpGet "This is a browserreply" :> Protocol.message
+    | _ -> Protocol.Failed 400 :> Protocol.message
