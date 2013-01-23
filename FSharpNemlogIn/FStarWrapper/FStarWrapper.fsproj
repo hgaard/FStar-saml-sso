@@ -80,6 +80,9 @@
     <Reference Include="X">
       <HintPath>..\..\Protocol\bin\X.dll</HintPath>
     </Reference>
+    <Reference Include="xServer">
+      <HintPath>..\..\Protocol\bin\xServer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CryptoTest.fs" />
@@ -87,11 +90,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Saml\Saml.fsproj">
-      <Name>Saml</Name>
-      <Project>{6a9a0d0b-a25b-4cf6-8816-c78f12900d0a}</Project>
-      <Private>True</Private>
-    </ProjectReference>
     <ProjectReference Include="..\Crypto\Crypto.fsproj">
       <Name>Crypto</Name>
       <Project>{8600d657-b1db-453d-ad81-0fc9da5cf7b3}</Project>
@@ -100,6 +98,11 @@
     <ProjectReference Include="..\Netw\Network.fsproj">
       <Name>Network</Name>
       <Project>{97623325-d541-453d-84d8-fdc27fa5ea7d}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Saml\Saml.fsproj">
+      <Name>Saml</Name>
+      <Project>{6a9a0d0b-a25b-4cf6-8816-c78f12900d0a}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

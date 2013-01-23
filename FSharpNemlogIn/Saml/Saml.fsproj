@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\oiosaml.net\src\dk.nita.saml20\dk.nita.saml20\dk.nita.saml20.csproj">
+    <ProjectReference Include="..\..\..\oiosaml.net\src\dk.nita.saml20\dk.nita.saml20\dk.nita.saml20.csproj">
       <Name>dk.nita.saml20</Name>
       <Project>{55520059-38bb-48bb-a30e-bfd385293d78}</Project>
       <Private>True</Private>

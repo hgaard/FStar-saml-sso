@@ -10,6 +10,7 @@ extern reference Network {language="F#";
 						dll="Network";
 						namespace="";
 						classname="Network"}
-extern Network val SendX: prin -> message -> SamlStatus
+extern Network val SendX: prin -> message -> bool
 extern Network val RecieveX: prin -> message
-extern Network val CreateSamlProtocolMessage: samlmessage -> dsig -> string
+
+

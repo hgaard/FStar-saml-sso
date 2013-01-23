@@ -13,7 +13,7 @@ samlProtocol:
 x:
 	rm -rf bin queries
 	mkdir -p queries bin
-	$(FSTAR)  --z3log samlProtocol.fst FstNetwork.fst X.fst
+	$(FSTAR) samlProtocol.fst FstNetwork.fst X.fst xserver.fst
 
 test:
 	cp $(MY_FSTAR_HOME)/bin/*.dll bin/

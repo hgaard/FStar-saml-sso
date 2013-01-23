@@ -1,8 +1,8 @@
 module Protocol
 
 type prin = string
-type pubkey :: prin => *
-type privkey :: prin => *
+type pubkey :: prin => string 
+type privkey :: prin => string
 type dsig = string
 type resource = bytes
 type uri = string
@@ -31,7 +31,6 @@ type Log2 :: string => string => nonce => E
 val Keygen:  p:prin
           -> (pubkey p * privkey p)
 
-
 val Sign:  p:prin
         -> privkey p
         -> msg:samlmessage{Log p msg}
@@ -58,7 +57,7 @@ extern reference Crypto {language="F#";
             classname="Crypto"}
 
 extern Crypto val KeyGenExt: p:prin
-          -> (string * string)
+          -> (pubkey p * privkey p)
 
 
 (*Saml functions*)

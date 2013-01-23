@@ -3,9 +3,18 @@ module X
 open Protocol
 open FstNetwork
 
+val GenKeys: prin -> string
+let GenKeys principal = 
+	println "starting keygen";
+	let (privk, pubk) = KeyGenExt principal in
+	
+	print_int 2;
+	"super"
+
 val GetReq: prin -> prin -> samlmessage
 let GetReq sp idp = 
 	CreateAuthnRequest sp idp
+	
 
 val GetSamlMessages: prin -> prin -> string
 let GetSamlMessages sp idp = 
@@ -29,7 +38,7 @@ let CreateAndSend sp idp =
 	let req = SamlProtocolMessage sp authReq "sig" in
 	let status = SendX sp req in
 	match status with
-	| Success -> print_string "great!";()
+	| true -> print_string "great!";()
 	| _ -> print_string "crap!";()
 
 	
@@ -39,10 +48,11 @@ let CreateSendAndRecieve sp idp =
 	let req = SamlProtocolMessage sp authReq "sig" in
 	let status = SendX sp req in
 	match status with
-	| Success -> print_string "great!";
+	| true -> print_string "great!";
 		let msg = RecieveX sp in
 		match msg with
 		| HttpGet (url) -> 
 			print_string url;()
 	| _ -> print_string "crap!";()
+
 

@@ -17,7 +17,7 @@ let WriteKeyToFile (filename:string) (key:string) =
     let file = File.CreateText(fn)
     file.Write key |>  file.Close
 
-let KeyGenExt prin : (string * string) = 
+let KeyGenExt prin : Prims.DepTuple<Protocol.pubkey,Protocol.privkey> = 
     let cspParams = new CspParameters()
     cspParams.ProviderType <- 1
     cspParams.Flags <- CspProviderFlags.UseArchivableKey
@@ -25,19 +25,12 @@ let KeyGenExt prin : (string * string) =
     let rsaProvicer = GetCryptoProvider
 
     // Export Public Key
-    let pubkey = rsaProvicer.ToXmlString false
+    let pubkey = Protocol.pubkey(0,rsaProvicer.ToXmlString false)
 
-    // save to file
-    let pubFilename = "pubkey-" + prin + ".xml"
-    WriteKeyToFile pubFilename pubkey 
-    
     // Export private key
-    let privkey = rsaProvicer.ToXmlString true
+    let privkey = Protocol.privkey(0,rsaProvicer.ToXmlString true)
 
-    let privFilename = "privkey-" + prin + ".xml"
-    WriteKeyToFile privFilename privkey
-
-    (privkey, pubkey)
+    new Prims.DconDepTuple<Protocol.pubkey,Protocol.privkey>(pubkey, privkey) :> Prims.DepTuple<Protocol.pubkey,Protocol.privkey>
 
 let SignMessage (prin:string) (key:string) (msg:string) : string = 
     let ByteConverter = GetEncoder

@@ -39,6 +39,7 @@
   <ItemGroup>
     <None Include="Script.fsx" />
     <Compile Include="Network.fs" />
+    <Compile Include="NetworkCalss.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=736440c9b414ea16" />
