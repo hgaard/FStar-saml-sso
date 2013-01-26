@@ -1,58 +1,35 @@
 module X
 
+open Lib
 open Protocol
-open FstNetwork
+open Network
 
-val GenKeys: prin -> string
-let GenKeys principal = 
-	println "starting keygen";
-	let (privk, pubk) = KeyGenExt principal in
-	
-	print_int 2;
-	"super"
+let printReq p url params cookies =
+	println (Concat "Prin: " p);
+	println (Concat "url: " url);
+	print_string "params: ";
+	printlist params;
+	print_string "cookies: ";
+	printlist cookies;
+	()
 
-val GetReq: prin -> prin -> samlmessage
-let GetReq sp idp = 
-	CreateAuthnRequest sp idp
-	
+val test1: string -> unit
+let test1 s = 
+	let req = Recieve s in
+	match req with
+	| Get (prin, url, params, cookies) ->
+		printReq prin url params cookies;()
 
-val GetSamlMessages: prin -> prin -> string
-let GetSamlMessages sp idp = 
-	print_string "Getting AuthReq\n";
-	let req = CreateAuthnRequest sp idp in
-	print_string req;
-	(*print_string "\nGetting Challenge\n";
-	let challenge = CreateChallenge sp in
-	print_string challenge;*)
-	print_string "\nGetting Assertion\n";
-	let assertion = CreateSamlAssertion "me" idp sp in
-	print_string assertion;
-	print_string "\nGetting Response\n";
-	let response = CreateSamlResponse idp sp assertion in
-	print_string response;
-	"Done"
+	| Response(status,body) ->
+		print_string "Response status: ";
+		print_int status;
+		println (Concat "message: " body);()
 
-val CreateAndSend: prin -> prin ->unit
-let CreateAndSend sp idp =
-	let authReq = CreateAuthnRequest sp idp in
-	let req = SamlProtocolMessage sp authReq "sig" in
-	let status = SendX sp req in
-	match status with
-	| true -> print_string "great!";()
-	| _ -> print_string "crap!";()
-
-	
-val CreateSendAndRecieve: prin -> prin ->unit
-let CreateSendAndRecieve sp idp =
-	let authReq = CreateAuthnRequest sp idp in
-	let req = SamlProtocolMessage sp authReq "sig" in
-	let status = SendX sp req in
-	match status with
-	| true -> print_string "great!";
-		let msg = RecieveX sp in
-		match msg with
-		| HttpGet (url) -> 
-			print_string url;()
-	| _ -> print_string "crap!";()
-
-
+val test2: string -> unit
+let test2 s = 
+	let params = ["param=value"] in
+	let cookie = ["Cookeie=valueCookie"] in
+	let msg = Get "prin" "dest" params cookie in
+	Send msg;
+	println "message sent";
+	()

@@ -1,6 +1,6 @@
 MY_FSTAR_HOME=`cygpath "$(FSTAR_HOME)"`
 FSTAR=fstar --genIL --writePrims --odir bin --dotnet4 --parallel --logQueries
-FSTAR_SRC= samlProtocol.fst FstNetwork.fst browser.fst serviceprovider.fst identityprovider.fst ModelUtil.fst main.fst
+FSTAR_SRC= samlProtocol.fst browser.fst serviceprovider.fst identityprovider.fst ModelUtil.fst main.fst
 
 all: clean dirs samlProtocol
 
@@ -13,7 +13,7 @@ samlProtocol:
 x:
 	rm -rf bin queries
 	mkdir -p queries bin
-	$(FSTAR) samlProtocol.fst FstNetwork.fst X.fst xserver.fst
+	$(FSTAR) Lib.fst Protocol.fst DummyNetwork.fst Crypto.fst Network.fst Saml.fst X.fst xserver.fst
 
 test:
 	cp $(MY_FSTAR_HOME)/bin/*.dll bin/

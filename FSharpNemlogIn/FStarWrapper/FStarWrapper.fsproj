@@ -43,6 +43,9 @@
     <Reference Include="Client">
       <HintPath>..\..\Protocol\bin\Client.dll</HintPath>
     </Reference>
+    <Reference Include="DummyNetwork">
+      <HintPath>..\..\Protocol\bin\DummyNetwork.dll</HintPath>
+    </Reference>
     <Reference Include="FSharp.Compiler">
       <HintPath>..\..\..\..\..\Utils\FStar\bin\FSharp.Compiler.dll</HintPath>
     </Reference>
@@ -52,10 +55,16 @@
     <Reference Include="Identityprovider">
       <HintPath>..\..\Protocol\bin\Identityprovider.dll</HintPath>
     </Reference>
+    <Reference Include="Lib">
+      <HintPath>..\..\Protocol\bin\Lib.dll</HintPath>
+    </Reference>
     <Reference Include="Main">
       <HintPath>..\..\Protocol\bin\Main.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
+    <Reference Include="Network">
+      <HintPath>..\..\Protocol\bin\Network.dll</HintPath>
+    </Reference>
     <Reference Include="Prims">
       <HintPath>..\..\Protocol\bin\Prims.dll</HintPath>
     </Reference>
@@ -90,19 +99,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Crypto\Crypto.fsproj">
-      <Name>Crypto</Name>
-      <Project>{8600d657-b1db-453d-ad81-0fc9da5cf7b3}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Netw\Network.fsproj">
-      <Name>Network</Name>
-      <Project>{97623325-d541-453d-84d8-fdc27fa5ea7d}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Saml\Saml.fsproj">
-      <Name>Saml</Name>
-      <Project>{6a9a0d0b-a25b-4cf6-8816-c78f12900d0a}</Project>
+    <ProjectReference Include="..\RuntimeExtention\RuntimeExtention.fsproj">
+      <Name>RuntimeExtention</Name>
+      <Project>{2137c9dd-cac4-4578-9c79-a08eab373f79}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

@@ -1,17 +1,44 @@
-module xServer
+module Serviceprovider
 
+open Lib
 open Protocol
-open FstNetwork
+open Saml
+open Crypto
+open Network
 
-val server: string -> string -> unit
-let server sp idp = 
-  let msg = RecieveX "sp" in
-  match msg with
-  | HttpGet (uri) -> 
-    let authReq = CreateAuthnRequest sp idp in
-    let req = SamlProtocolMessage sp authReq "sig" in
-    let status = SendX "sp" req in
-    match status with
-    | true -> print_string "great!";()
-    | false -> print_string "crap!";()
-  | _ -> print_string "Oh shit!";()
+val hasValidSession: list string -> bool
+let hasValidSession cookies = 
+  (* Find AuthenticationKey cookie and validate *)
+  let ak = getStrInList cookies "AuthenticationKey" in
+  if isEmptyStr ak then false 
+  else true (*Should be validated somehow*)
+
+val serviceprovider:  me:prin -> pubkey me -> privkey me ->
+                      browser:prin -> idp:prin -> pubkey idp -> unit 
+let serviceprovider me pubk privk browser idp pubkidp = 
+  let reqRes = Recieve browser in (*1*) (*7*)
+  match reqRes with
+  | Get (prin,uri,params,cookies) -> 
+
+    (*Check for valid session*)
+    if hasValidSession cookies then
+      let resp = Response 200 "The requested resource" in
+      Send resp (*8*)
+    else (*Create AuthnRequest and send (via client) to idp*)
+      (let authnReq = CreateAuthnRequest me idp in 
+      assume(Log me authnReq) (*Protocol event*);
+      let sigSP = Sign me privk authnReq in
+      let resp = CreateRedirectResponse idp authnReq sigSP uri in 
+      Send resp (*2*))
+
+  | Post (sp, params, cookies) -> 
+      let msg = getStrInList params "SamlMessage" in
+      let sigIDP = getStrInList params "Signature" in
+      if VerifySignature idp pubkidp msg sigIDP
+      then
+        (assert(Log idp msg);
+          let resp = Response 200 "The requested resource" in
+          Send resp) (*8*)
+      else Send (Response 403 "Access denied")(*8.1*)
+  
+  | _ -> ()
