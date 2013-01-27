@@ -1,6 +1,7 @@
 module Serviceprovider
 
 open Lib
+open ContentServer
 open Protocol
 open Saml
 open Crypto
@@ -22,7 +23,7 @@ let serviceprovider me pubk privk browser idp pubkidp =
 
     (*Check for valid session*)
     if hasValidSession cookies then
-      let resp = Response 200 "The requested resource" in
+      let resp = Response 200 (getContent uri) [] in
       Send resp (*8*)
     else (*Create AuthnRequest and send (via client) to idp*)
       (let authnReq = CreateAuthnRequest me idp in 
@@ -37,8 +38,9 @@ let serviceprovider me pubk privk browser idp pubkidp =
       if VerifySignature idp pubkidp msg sigIDP
       then
         (assert(Log idp msg);
-          let resp = Response 200 "The requested resource" in
+          let ak = Concatkv "AuthenticationKey" (GenerateNonce sp) in
+          let resp = Response 200 (getContent "Loggedin") [ak] in
           Send resp) (*8*)
-      else Send (Response 403 "Access denied")(*8.1*)
+      else Send (Response 403 (getErrorPage 403) [])(*8.1*)
   
-  | _ -> ()
+  | _ -> Send (Response 400 (getErrorPage 400) [])

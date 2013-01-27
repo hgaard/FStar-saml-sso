@@ -20,14 +20,14 @@ let test1 s =
 	| Get (prin, url, params, cookies) ->
 		printReq prin url params cookies;()
 
-	| Response(status,body) ->
+	| Response(status,body, cookies) ->
 		print_string "Response status: ";
 		print_int status;
 		println (Concat "message: " body);()
 
 val test2: string -> unit
 let test2 s = 
-	let params = ["param=value"] in
+	let params = [("param","value")] in
 	let cookie = ["Cookeie=valueCookie"] in
 	let msg = Get "prin" "dest" params cookie in
 	Send msg;

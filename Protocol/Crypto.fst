@@ -21,6 +21,7 @@ val AuthenticateUser: user:string
         -> challenge:nonce
         -> b:bool{b=true ==> Log2 user password challenge}
 
+val GenerateNonce: prin -> nonce (*Add refinement to ensure unqueness*)
 (*val Encrypt: ...
 
 val Decrypt: ...*)
@@ -33,3 +34,4 @@ extern reference Crypto {language="F#";
 
 extern Crypto val KeyGenExt: p:prin
           -> (pubkey p * privkey p)
+
