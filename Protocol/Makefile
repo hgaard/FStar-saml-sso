@@ -1,6 +1,6 @@
 MY_FSTAR_HOME=`cygpath "$(FSTAR_HOME)"`
 FSTAR=fstar --genIL --writePrims --odir bin --dotnet4 --parallel --logQueries
-FSTAR_SRC= Lib.fst Protocol.fst DummyNetwork.fst ContentServer.fst Crypto.fst Network.fst Saml.fst serviceprovider.fst
+FSTAR_SRC= Lib.fst Protocol.fst SessionManager.fst DummyNetwork.fst ContentServer.fst Crypto.fst Network.fst Saml.fst serviceprovider.fst identityprovider.fst
 X_SRC= Lib.fst Protocol.fst DummyNetwork.fst ContentServer.fst Crypto.fst Network.fst Saml.fst xserver.fst
 
 all: clean dirs protocol

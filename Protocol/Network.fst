@@ -19,10 +19,11 @@ extern Network val RecieveRequest: prin -> (string * string * string * list stri
 *)
 
 type HttpMessage =
-	| Get: prin -> string -> list (string * string) -> list (string * string) -> HttpMessage
- 	| Post: prin -> list (string * string) -> list (string * string) -> HttpMessage
+	| Get: uri -> list (string * string) -> list (string * string) -> HttpMessage
+ 	| Post: uri -> list (string * string) -> list (string * string) -> list (string * string) -> HttpMessage
  	| Redirect: prin -> string -> list (string * string) -> list (string * string) -> HttpMessage
-	| Response: int -> body:string -> list (string * string) -> HttpMessage
+	| Response: body:string -> list (string * string) -> HttpMessage
+	| ErrorResponse: int -> body:string -> list (string * string) -> HttpMessage
 
 val buildDestination: string -> list (string * string) -> string
 let buildDestination url params =
@@ -32,7 +33,7 @@ let buildDestination url params =
 val Send: HttpMessage -> unit
 let Send message =
 	match message with
-	| Get (prin,url,params,cookies) -> 
+	| Get (url,params,cookies) -> 
 		let dest = buildDestination url params in
 		let cl = map (fun (k,v)-> Concatkv k "=" v) cookies in
 		SendRequest dest cl "hello";()
@@ -45,6 +46,6 @@ let Recieve client =
 	match verb with
 	| "GET" -> 
 		let params = [("here query", "params should be")] in
-		let c = [("atemp","cookie")]
-in		Get client url params c
-	| _ -> Response 400 "failed" []
+		let c = [("atemp","cookie")] in		
+		Get url params c
+	| _ -> ErrorResponse 400 "failed" []
