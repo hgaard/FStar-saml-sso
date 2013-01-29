@@ -1,0 +1,689 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"me",
+				"message"
+			],
+			[
+				"Cre",
+				"CreateAuthnRequest"
+			],
+			[
+				"p",
+				"principalSender"
+			],
+			[
+				"e",
+				"errorId"
+			],
+			[
+				"pr",
+				"pricipal"
+			],
+			[
+				"prin",
+				"print_string"
+			],
+			[
+				"privk",
+				"privk"
+			],
+			[
+				"b",
+				"browser"
+			],
+			[
+				"s",
+				"sp"
+			],
+			[
+				"saml",
+				"samlresp"
+			],
+			[
+				"r",
+				"resp"
+			],
+			[
+				"cre",
+				"createResponse"
+			],
+			[
+				"d",
+				"dsig"
+			],
+			[
+				"re",
+				"req"
+			],
+			[
+				"Sa",
+				"SamlProtocolMessage"
+			],
+			[
+				"iden",
+				"identityprovicer"
+			],
+			[
+				"c",
+				"client"
+			],
+			[
+				"pubk",
+				"pubkidp"
+			],
+			[
+				"pu",
+				"pubksp"
+			],
+			[
+				"idp",
+				"idpResp"
+			],
+			[
+				"cha",
+				"chal"
+			],
+			[
+				"res",
+				"resp"
+			],
+			[
+				"a",
+				"authRequest"
+			],
+			[
+				"aut",
+				"authnReq"
+			],
+			[
+				"se",
+				"send"
+			],
+			[
+				"create",
+				"createSamlResponse"
+			],
+			[
+				"auth",
+				"authResponse"
+			],
+			[
+				"rec",
+				"recieve"
+			],
+			[
+				"sam",
+				"samlResponseRequest"
+			],
+			[
+				"ur",
+				"uriSP"
+			],
+			[
+				"recieveAutenticationc",
+				"recieveAutenticationCredentials"
+			],
+			[
+				"sig",
+				"sigIDP"
+			],
+			[
+				"cr",
+				"createSamlResponse"
+			],
+			[
+				"send",
+				"sendAutenticationRequest"
+			],
+			[
+				"reci",
+				"recieveAutenticationRequest"
+			],
+			[
+				"recieveHttpRed",
+				"recievehttpRedirect"
+			],
+			[
+				"u",
+				"uri"
+			],
+			[
+				"recie",
+				"recieveHttpRequest"
+			],
+			[
+				"reso",
+				"resource"
+			],
+			[
+				"S",
+				"SimpleCrypto"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"sni",
+				"Snippet: Listing"
+			],
+			[
+				"git di",
+				"Git: Diff Current File"
+			],
+			[
+				"git diff",
+				"Git: Diff Current File"
+			],
+			[
+				" git di",
+				"Git: Diff Current File"
+			],
+			[
+				"pa",
+				"Package Control: Discover Packages"
+			],
+			[
+				"git che",
+				"Git: Checkout Current File"
+			],
+			[
+				"",
+				":e - Revert"
+			],
+			[
+				"paclke",
+				"Package Control: Install Package"
+			],
+			[
+				"git d",
+				"Git: Diff Current File"
+			],
+			[
+				"git",
+				"Git: Diff Tool All"
+			],
+			[
+				"packe",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"git ",
+				"Git: Gitk"
+			],
+			[
+				"git pu",
+				"Git: Pull"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"ma",
+				"Markdown Preview: preview in Browser"
+			],
+			[
+				"mak",
+				"Markdown Preview: preview in Browser"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"snipp",
+				"Snippet: \\begin{}…\\end{}"
+			],
+			[
+				"git c",
+				"Git: Commit"
+			],
+			[
+				"git stat",
+				"Git: Status"
+			],
+			[
+				"git: add",
+				"Git: Add..."
+			],
+			[
+				"git a",
+				"Git: Diff All"
+			],
+			[
+				"gi",
+				"Git: Status"
+			],
+			[
+				"packa",
+				"Package Control: Discover Packages"
+			],
+			[
+				"gitc	",
+				"Git: Commit"
+			],
+			[
+				"sn",
+				"Snippet: follow up"
+			],
+			[
+				"packl",
+				"Package Control: Discover Packages"
+			],
+			[
+				"sni	",
+				"Snippet: Display Math — \\[ … \\]"
+			],
+			[
+				"git add",
+				"Git: Add..."
+			],
+			[
+				"git ad",
+				"Git: Add Current File"
+			],
+			[
+				"g",
+				"Git: Pull"
+			],
+			[
+				"git lo",
+				"Git: Log All"
+			],
+			[
+				"snippe",
+				"Snippet: Enumerate"
+			],
+			[
+				"browse",
+				"Preferences: Browse Packages"
+			],
+			[
+				"bro",
+				"Preferences: Browse Packages"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/jbhq/SkyDrive/Documents/Coursera-UCJBHQ01/Programming Languages/code/test.sml",
+		"/C/Users/jbhq/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Users/jbhq/AppData/Roaming/Sublime Text 2/Packages/User/Main.sublime-menu",
+		"/C/Users/jbhq/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/jbhq/AppData/Roaming/Sublime Text 2/Packages/User/SML.sublime-build",
+		"/C/Program Files (x86)/SMLNJ/bin/sml.bat",
+		"/C/Users/jbhq/AppData/Roaming/Sublime Text 2/Packages/User/Default.sublime-commands",
+		"/C/Utils/FStar/fstar-0.6-alpha/examples/monadic/js/inv.js.fst",
+		"/C/Users/jbhq/Desktop/AttributeQueryVirkRequest",
+		"/C/Users/jbhq/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/1PYVLCFL/Web.config",
+		"/C/Users/jbhq/Desktop/req1.xml",
+		"/C/Users/jbhq/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/1PYVLCFL/3600_log1.txt",
+		"/C/Users/jbhq/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/1PYVLCFL/3600_log2.txt",
+		"/C/Users/jbhq/Desktop/req2.xml",
+		"/C/Utils/FStar/fstar-0.6-alpha/src/wrapper.fs",
+		"/C/Utils/FStar/fstar-0.6-alpha/src/certify/certify.fst",
+		"/C/Utils/FStar/fstar-0.6-alpha/src/certify/prims.fst",
+		"/C/Utils/FStar/fstar-0.6-alpha/src/certify/stlc.fst",
+		"/C/Users/jbhq/Speciale/code/StarProtocol/Protocol/bin/query-0005.smt2",
+		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Model Driven Development/Model Driven Development/mdd-cvl/doc/project/project.lyx",
+		"/C/Users/jbhq/Speciale/mp-docs/project-description.tex",
+		"/C/Utils/FStar/fstar-0.6-alpha/examples/healthweb-azure/make",
+		"/C/Users/jbhq/Speciale/code/StarProtocol/Protocol/-",
+		"/C/Users/jbhq/Downloads/readme (2).txt",
+		"/C/Users/jbhq/Downloads/readme.txt",
+		"/C/Users/jbhq/Speciale/code/StarProtocol/Protocol/build.ps1",
+		"/N/KFOBS/SampleXML/SampleReponse.xml",
+		"/C/Users/jbhq/.gitconfig",
+		"/C/Users/jbhq/Speciale/code/StarProtocol/.gitignore",
+		"/C/Users/jbhq/Speciale/code/StarProtocol/.git/config",
+		"/C/Utils/FStar/fstar-0.6-alpha/setenv.sh",
+		"/C/Users/jbhq/Speciale/code/starprotocol/setenv.sh",
+		"/C/Users/jbhq/Speciale/code/StarProtocol/Protocol/todo.txt",
+		"/C/Users/jbhq/Speciale/code/StarProtocol/Protocol/identityprovider-copy.fst",
+		"/C/Speciale/code/StarProtocol/Protocol/identityprovider-copy.fst",
+		"/C/Users/jbhq/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Speciale/code/StarProtocol/Protocol/ServiceProvider-copy.fst",
+		"/C/Speciale/code/StarProtocol/Protocol/build.ps1",
+		"/C/Windows/System32/Drivers/etc/hosts",
+		"/C/Users/jbhq/.oces/Digital Signatur for Jakob HÃ¸jgaard.html",
+		"/C/Users/jbhq/.oces/Jakob.cer",
+		"/C/Speciale/code/StarProtocol/FSharpNemlogIn/FSharpNemlogIn/SamlProtocol.fs",
+		"/C/Speciale/code/StarProtocol/FSharpNemlogIn/FSharpProtocol/SamlProtocol.fs",
+		"/C/Speciale/code/StarProtocol/FSharpNemlogIn/FSharpNemlogIn/Program.fs",
+		"/C/Speciale/code/StarProtocol/Desktop",
+		"/C/Speciale/code/StarProtocol/SimpleCrypto.fst",
+		"/C/Users/jbhq/SkyDrive/Documents/netværkskode.txt",
+		"/C/Users/jbhq/Downloads/cv_6.tex",
+		"/C/Users/jbhq/Downloads/cv_1.tex",
+		"/C/Users/jbhq/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/1PYVLCFL/corrupted_log_entry_6dec.txt",
+		"/C/Speciale/code/StarProtocol/simplesaml.fst",
+		"/C/Utils/cygwin/Cygwin.bat",
+		"/C/Chocolatey/bin/Console.bat",
+		"//FSDKBA110/jbhq/WindowsPowerShell/Microsoft.PowerShell_profile.ps1",
+		"/C/Chocolatey/lib/Console2.2.0.148/bin/console.xml",
+		"/C/Users/jbhq/log",
+		"/C/Chocolatey/lib/Console2.2.0.148/content/console.xml",
+		"/C/Users/jbhq/AppData/Roaming/Sublime Text 2/Packages/Markdown Preview/sample.md",
+		"/C/Users/jbhq/AppData/Roaming/Sublime Text 2/Packages/Markdown Preview/MarkdownPreview.sublime-settings",
+		"/C/Speciale/code/StarProtocol/test.fst",
+		"/C/Speciale/FStar/examples/healthweb-azure/main.fs",
+		"/C/Speciale/code/StarProtocol/SAMLProtocol.fst",
+		"/C/Speciale/FStar/examples/healthweb-azure/prin.fine",
+		"/C/Speciale/FStar/examples/healthweb-azure/Makefile",
+		"/C/Speciale/FStar/examples/healthweb-azure/messages.fine",
+		"/C/Speciale/FStar/examples/healthweb-azure/ext.fs",
+		"/C/Speciale/code/StarProtocol/README.md",
+		"/C/Speciale/FStar/README.txt",
+		"/C/Speciale/mp-docs/protocol-description.tex",
+		"/C/Speciale/mp-docs/project-description.tex",
+		"/C/Utils/FStar/examples/healthweb-azure/util.fine",
+		"/C/Speciale/code/StarProtocol/setenv.sh",
+		"/C/Speciale/FStar/setenv.sh",
+		"//vmkfobsdprxy01/d$/logs/ADFSProxy.Web.log",
+		"//FSDKBA110/jbhq/Tola Kristiansen cvr-15731249 Saxo Bank cpr-2805711682.html",
+		"//FSDKBA110/jbhq/tola.cer",
+		"/C/Speciale/FStar/examples/healthweb-azure/datamodel.fine",
+		"/C/Speciale/FStar/examples/healthweb-azure/auth.fine",
+		"/C/Speciale/FStar/examples/healthweb-azure/externdb.fine",
+		"/C/Speciale/FStar/examples/healthweb-azure/src.txt",
+		"/C/Speciale/code/StarProtocol/build.ps1",
+		"/N/WindowsPowerShell/Microsoft.PowerShell_profile.ps1",
+		"//vmkfobsdlprxy01/d$/logs/AttributeQuery.Web.log",
+		"//vmkfobsdladfs01/d$/logs/AttributeQuery.Service.log",
+		"//VMKFOBSBLD02.corp.novocorp.net/Logs/NightlyBuild.oes.kfobs.NemLogin.Main.DKDev.txt",
+		"/C/Speciale/FStar/examples/interop/Makefile",
+		"/C/Speciale/code/StarProtocol/ServiceProvider.fst",
+		"/C/Speciale/FStar/fstar-0.5-alpha/src/wrapper.fs",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/interop/seq.fs",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/interop/fseq.fst",
+		"/C/Speciale/FStar/fstar-0.5-alpha/setenv.sh",
+		"//vmkfobsdprxy01/D/logs/ADFSProxy.Web.log",
+		"/C/Users/jbhq/Downloads/ooapi.net-1.82.1-source/ooapi.net/Docs/README.txt",
+		"//VMKFOBSBLD01.corp.novocorp.net/Logs/NightlyBuild.oes.kfobs.NemLogin.Main.DKDev.txt",
+		"/C/Speciale/code/StarProtocol/HigherOrder",
+		"/C/Speciale/code/StarProtocol/ser",
+		"/C/Speciale/code/StarProtocol/ServiceProvider",
+		"/C/Speciale/code/StarProtocol/.gitignore",
+		"/C/Speciale/FStar/StarProtocol/.gitignore",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/myfstar/wrapper.fs",
+		"/C/Speciale/FStar/fstar-0.5-alpha/src/fstar.fs",
+		"/C/Speciale/FStar/fstar-0.5-alpha/src/Makefile",
+		"/C/Speciale/FStar/StarProtocol/SimpleCrypto.fst",
+		"/C/Speciale/FStar/StarProtocol/SAMLProtocol.fst",
+		"/C/Speciale/code/StarProtocol/Makefile",
+		"/C/Speciale/FStar/StarProtocol/Makefile",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/myProtocol",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/myfstar/HelloWorld.fst",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/interop/Makefile",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/myfstar/Makefile",
+		"/C/Speciale/FStar/fstar-0.5-alpha/lib/prims.fst",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/healthweb-azure/src.txt",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/healthweb-azure/Makefile",
+		"/C/Users/jbhq/Downloads/f7-release-2.0.11129/f7-release/README.txt",
+		"/C/Users/jbhq/Downloads/f7-release-2.0.11129/f7-release/samples/protocols/v1/Makefile",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/myfstar/module HelloWorld.fst",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/myfstar/MAKEFILE",
+		"/C/Speciale/mp-docs/messages/respons.xml",
+		"/C/Speciale/mp-docs/messages/authnRequest.xml",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/interop/wrapper.fs",
+		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Speciale/FStar/fstar-0.5-alpha/INSTALL.txt",
+		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Speciale/FStar/fstar-0.5-alpha/examples/healthweb-azure/main.fs",
+		"/C/Speciale/FStar/fstar-0.5-alpha/bin/queries/all.smt",
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/sessions/Makefile",
+		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Speciale/FStar/fstar-0.5-alpha/examples/healthweb-azure/messages.fine",
+		"/C/Speciale/FStar/fstar-0.5-alpha/src/App.config",
+		"/C/Speciale/FStar/fstar-0.5-alpha/src/dump",
+		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Speciale/FStar/fstar-0.5-alpha/examples/interop/Makefile"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"C:\\Utils\\FStar\\fstar-0.6-alpha",
+			"C:\\Utils\\FStar\\fstar-0.6-alpha\\src",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"Value ",
+			"Value",
+			"bind_opt",
+			"lookupBindings",
+			"option",
+			"<>",
+			"not",
+			"Not",
+			"not",
+			"<>",
+			"\"\"",
+			"starts",
+			"log",
+			"myPapers",
+			"strSplitByDelimiter",
+			"[\"",
+			"file",
+			"printf",
+			"string -> list string -> string",
+			"ConcatList",
+			"map",
+			"list",
+			"Add",
+			"stopAllServers",
+			"getRecv",
+			"createComm",
+			"listener",
+			"extern",
+			"ExternNet",
+			"extern",
+			"let print_string",
+			"print_string",
+			"StreamReader",
+			"getRecv",
+			"Runtime",
+			"cry",
+			"getRecv",
+			"TCPListener",
+			"getSend",
+			"send",
+			"open_credential",
+			"find_patient_records",
+			"OneRecord",
+			"handle_req",
+			"internal_handle_req",
+			"search_by_kw",
+			"dbrec",
+			"find_records_by_keyword",
+			"check_password",
+			"parse_dbrec",
+			"int",
+			"Pickler",
+			"send",
+			"Send",
+			"send",
+			"sign",
+			"verify",
+			"client",
+			"browser",
+			"SamlProtocolMessage",
+			"server",
+			"client",
+			"SamlProtocolMessage",
+			"\"\"",
+			"relay",
+			"sign",
+			"*",
+			"Challenge",
+			"let exists ",
+			"let exists",
+			"exists",
+			"print_string",
+			"GetPatientRecords",
+			"uri",
+			"metadata",
+			"print",
+			"q1",
+			"git"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"Send",
+			"Sign",
+			"VerifySignature",
+			"browser",
+			"idp",
+			"browser",
+			"prin",
+			"samlp"
+		],
+		"reverse": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.exec":
+	{
+		"height": 160.0
+	},
+	"output.git":
+	{
+		"height": 100.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 124.0
+	},
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"mai",
+				"main.fs"
+			],
+			[
+				"prin",
+				"prin.fine"
+			],
+			[
+				"ann",
+				"/C/Speciale/FStar/examples/healthweb-azure/prin.fine"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 207.0,
+	"status_bar_visible": true
+}

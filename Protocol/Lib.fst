@@ -22,10 +22,10 @@ let Concatkv k sep v =
 	let ks = Concat k sep in
 	Concat ks v
 
-val printlist: list string -> unit
+val printlist: list (string*string) -> unit
 let printlist l = match l with
 	| [] -> ()
-	| hd::tl -> println hd;
+	| (k,v)::tl -> println (Concatkv k "=" v);
 		printlist tl
 
 val getStrInList: list string -> string -> string

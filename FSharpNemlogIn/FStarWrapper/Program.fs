@@ -6,7 +6,7 @@ open CryptoTest
 [<EntryPoint>]
 let main argv = 
   
-  let s = X.test1 "h"
+  //let s = X.test1 "h"
 
 
   let key = Console.Read ()

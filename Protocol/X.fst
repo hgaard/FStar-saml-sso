@@ -1,35 +1,18 @@
 module X
 
-open Lib
-open Protocol
-open Network
+type prin = string
 
-let printReq p url params cookies =
-	println (Concat "Prin: " p);
-	println (Concat "url: " url);
-	print_string "params: ";
-	printlist params;
-	print_string "cookies: ";
-	printlist cookies;
-	()
+extern reference Network {language="F#";
+						dll="RuntimeExt";
+						namespace="";
+						classname="Network"}
+extern Network val Send: prin -> string -> bool
+extern Network val Recieve: prin -> (string * string)
 
-val test1: string -> unit
-let test1 s = 
-	let req = Recieve s in
-	match req with
-	| Get (prin, url, params, cookies) ->
-		printReq prin url params cookies;()
+let test server =
+	Send server "the message";
+	let resp, status = Recieve server in
 
-	| Response(status,body, cookies) ->
-		print_string "Response status: ";
-		print_int status;
-		println (Concat "message: " body);()
-
-val test2: string -> unit
-let test2 s = 
-	let params = [("param","value")] in
-	let cookie = ["Cookeie=valueCookie"] in
-	let msg = Get "prin" "dest" params cookie in
-	Send msg;
-	println "message sent";
+	println (Concat "response: " resp);	
+	println (Concat "status: " status);
 	()
