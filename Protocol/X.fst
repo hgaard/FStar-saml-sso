@@ -11,7 +11,7 @@ extern Network val Recieve: prin -> (string * string)
 
 let test server =
 	Send server "the message";
-	let resp, status = Recieve server in
+	let (resp, status) = Recieve server in
 
 	println (Concat "response: " resp);	
 	println (Concat "status: " status);

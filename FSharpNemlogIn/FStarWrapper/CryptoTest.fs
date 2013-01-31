@@ -1,8 +1,8 @@
 ﻿module CryptoTest
 
-open System.Security.Cryptography
-open Network
-open Crypto
+//open System.Security.Cryptography
+//open Network
+//open Crypto
 
 //let TestCrypto = 
 //    let spid = "https://saml.serviceprovicer.org"

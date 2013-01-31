@@ -1,13 +1,10 @@
 ﻿open System
-open System.Security.Cryptography
-open Network
-open CryptoTest
 
+
+open System
 [<EntryPoint>]
 let main argv = 
-  
-  //let s = X.test1 "h"
-
-
-  let key = Console.Read ()
-  0 // return an integer exit code
+    X.test "me"
+    printfn "Done" 
+    ignore <| Console.Read()  //removing this just so that test runs to completion without kb input
+    0 //integer exit code

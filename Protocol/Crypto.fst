@@ -4,6 +4,9 @@ open Protocol
 
 val Keygen:  p:prin
           -> (pubkey p * privkey p)
+let Keygen prin =
+    let (pk,sk) = KeyGenExt prin in
+    (pubkey pk,privkey sk)
 
 val Sign:  p:prin
         -> privkey p
@@ -33,5 +36,5 @@ extern reference Crypto {language="F#";
             classname="Crypto"}
 
 extern Crypto val KeyGenExt: p:prin
-          -> (pubkey p * privkey p)
+          -> (string * string)
 

@@ -22,11 +22,17 @@ let Concatkv k sep v =
 	let ks = Concat k sep in
 	Concat ks v
 
-val printlist: list (string*string) -> unit
+val printlist: list string -> unit
 let printlist l = match l with
 	| [] -> ()
-	| (k,v)::tl -> println (Concatkv k "=" v);
+	| hd::tl -> println hd;
 		printlist tl
+
+val printTuplelist: list (string*string) -> unit
+let printTuplelist l = match l with
+	| [] -> ()
+	| (k,v)::tl -> println (Concatkv k "=" v);
+		printTuplelist tl
 
 val getStrInList: list string -> string -> string
 let getStrInList l str = match l with
