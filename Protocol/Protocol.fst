@@ -2,7 +2,9 @@ module Protocol
 
 type prin = string
 type uri = string
-type pubkey :: prin => *
+type pubkey :: * => * =
+	| PublicKey :  prin -> pubkey prin
+
 type privkey :: prin => *
 type dsig = string
 type samlmessage = string

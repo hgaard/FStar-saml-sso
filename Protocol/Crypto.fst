@@ -6,7 +6,7 @@ val Keygen:  p:prin
           -> (pubkey p * privkey p)
 let Keygen prin =
     let (pk,sk) = KeyGenExt prin in
-    (pubkey pk,privkey sk)
+    (PublicKey pk,privkey sk)
 
 val Sign:  p:prin
         -> privkey p
