@@ -59,3 +59,5 @@ let getListItem l item = match l with
 	| hd::tl -> 
 		if strStartsWith hd item then Some hd
 		else getListItem tl item
+
+val append: list (string*string) -> list (string*string) -> list (string*string)

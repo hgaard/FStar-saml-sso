@@ -23,7 +23,8 @@ let serviceprovider me pubk privk browser idp pubkidp =
       (let authnReq = CreateAuthnRequest me idp in 
       assume(Log me authnReq) (*Protocol event*);
       let sigSP = Sign me privk authnReq in
-      let resp = CreateRedirectResponse idp authnReq sigSP in 
+      let samlMsg = SamlAuthnRequestMessage authnReq sigSP in
+      let resp = CreateRedirectResponse idp samlMsg in 
       Send resp (*2*))
 
   | Post (uri, qparams, fparams, cookies) -> 
