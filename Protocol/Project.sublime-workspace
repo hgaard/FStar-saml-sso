@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"A",
+				"AuthnRequest"
+			],
+			[
+				"SamlM",
+				"samlmessage"
+			],
+			[
+				"Sa",
+				"SamlMessage"
+			],
+			[
 				"me",
 				"message"
 			],
@@ -58,10 +70,6 @@
 			[
 				"re",
 				"req"
-			],
-			[
-				"Sa",
-				"SamlProtocolMessage"
 			],
 			[
 				"iden",
@@ -167,16 +175,55 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "/C/Users/jakob/Speciale/StarProtocol/Protocol/SAMLProtocol.fst",
+			"settings":
+			{
+				"buffer_size": 993,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "module Serviceprovider\n\nopen Lib\nopen SessionManager\nopen ContentServer\nopen SamlProtocol\n\nval serviceprovider:  me:prin -> pubkey me -> privkey me ->\n                      client:prin -> idp:prin -> pubkey idp -> unit \nlet serviceprovider me pubk privk client idp pubkidp = \n  let req = RecieveSaml client\n  match req with \n  | Login (uri) -> \n    (*Create Authn request*) \n    let authnReq = AuthnRequest me \n\n\n\n\n\n\n\n(*  let req = Recieve browser in (*1*) (*7*)\n  match req with\n  | Get (uri,params,cookies) -> \n\n    (*Check for valid session*)\n    if hasValidSession cookies then\n      let resp = Response (getContent uri) [] in\n      Send resp (*8*)\n    else (*Create AuthnRequest and send (via client) to idp*)\n      (let authnReq = CreateAuthnRequest me idp in \n      assume(Log me authnReq) (*Protocol event*);\n      let sigSP = Sign me privk authnReq in\n      let resp = CreateRedirectResponse idp authnReq sigSP in \n      Send resp (*2*))\n\n  | Post (uri, qparams, fparams, cookies) -> \n      let msg = getStrInTupleList fparams \"SamlMessage\" in\n      let sigIDP = getStrInTupleList fparams \"Signature\" in\n      if VerifySignature idp pubkidp msg sigIDP\n      then\n        (assert(Log idp msg);\n          let ak =  GenerateNonce me in\n          let resp = Response (getContent \"Logged-in\") [(\"AuthenticationKey\", ak)] in\n          Send resp) (*8*)\n      else Send (ErrorResponse 403 (getErrorPage 403) [])(*8.1*)\n  \n  | _ -> Send (ErrorResponse 400 (getErrorPage 400) [])\n*)",
+			"file": "/C/Users/jakob/Speciale/StarProtocol/Protocol/xserver.fst",
+			"file_size": 1368,
+			"file_write_time": 130044642826764230,
+			"settings":
+			{
+				"buffer_size": 1481,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 104.0,
 		"selected_items":
 		[
 			[
+				"PACKA",
+				"Preferences: Browse Packages"
+			],
+			[
 				"pac",
-				"Package Control: List Packages"
+				"Preferences: Browse Packages"
+			],
+			[
+				"pa",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"pack",
+				"Package Control: Add Repository"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"upda",
+				"Package Control: Upgrade Package"
 			],
 			[
 				"insta",
@@ -201,10 +248,6 @@
 			[
 				" git di",
 				"Git: Diff Current File"
-			],
-			[
-				"pa",
-				"Package Control: Discover Packages"
 			],
 			[
 				"git che",
@@ -253,10 +296,6 @@
 			[
 				"mak",
 				"Markdown Preview: preview in Browser"
-			],
-			[
-				"pack",
-				"Package Control: Install Package"
 			],
 			[
 				"snipp",
@@ -348,6 +387,10 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Jakob/Speciale/mp-docs/messages/authnRequest.xml",
+		"/C/Users/Jakob/Speciale/mp-docs/messages/respons.xml",
+		"/C/Users/jakob/Speciale/StarProtocol/Protocol/Crypto.fst",
+		"/C/Users/jakob/Speciale/StarProtocol/Protocol/Protocol.fst",
 		"/C/Users/jbhq/SkyDrive/Documents/Coursera-UCJBHQ01/Programming Languages/code/test.sml",
 		"/C/Users/jbhq/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jbhq/AppData/Roaming/Sublime Text 2/Packages/User/Main.sublime-menu",
@@ -471,11 +514,7 @@
 		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Speciale/FStar/fstar-0.5-alpha/INSTALL.txt",
 		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Speciale/FStar/fstar-0.5-alpha/examples/healthweb-azure/main.fs",
 		"/C/Speciale/FStar/fstar-0.5-alpha/bin/queries/all.smt",
-		"/C/Speciale/FStar/fstar-0.5-alpha/examples/sessions/Makefile",
-		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Speciale/FStar/fstar-0.5-alpha/examples/healthweb-azure/messages.fine",
-		"/C/Speciale/FStar/fstar-0.5-alpha/src/App.config",
-		"/C/Speciale/FStar/fstar-0.5-alpha/src/dump",
-		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Speciale/FStar/fstar-0.5-alpha/examples/interop/Makefile"
+		"/C/Speciale/FStar/fstar-0.5-alpha/examples/sessions/Makefile"
 	],
 	"find":
 	{
@@ -599,8 +638,65 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/jakob/Speciale/StarProtocol/Protocol/SAMLProtocol.fst",
+					"settings":
+					{
+						"buffer_size": 993,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								794,
+								805
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/F#/F#.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/jakob/Speciale/StarProtocol/Protocol/xserver.fst",
+					"settings":
+					{
+						"buffer_size": 1481,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								410,
+								410
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/F#/F#.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 88.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -657,6 +753,18 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"",
+				"SAMLProtocol.fst"
+			],
+			[
+				"pr",
+				"Protocol.fst"
+			],
+			[
+				"cr",
+				"Crypto.fst"
+			],
 			[
 				"mai",
 				"main.fs"
