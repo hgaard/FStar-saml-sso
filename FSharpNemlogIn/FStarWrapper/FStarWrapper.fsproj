@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>FStarWrapper</RootNamespace>
     <AssemblyName>FStarWrapper</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Name>FStarWrapper</Name>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -37,60 +37,24 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="basic">
-      <HintPath>..\..\..\..\..\Utils\FStar\bin\basic.dll</HintPath>
-    </Reference>
-    <Reference Include="Client">
-      <HintPath>..\..\Protocol\bin\Client.dll</HintPath>
-    </Reference>
-    <Reference Include="DummyNetwork">
-      <HintPath>..\..\Protocol\bin\DummyNetwork.dll</HintPath>
-    </Reference>
     <Reference Include="FSharp.Compiler">
-      <HintPath>..\..\..\..\..\Utils\FStar\bin\FSharp.Compiler.dll</HintPath>
-    </Reference>
-    <Reference Include="FstNetwork">
-      <HintPath>..\..\Protocol\bin\FstNetwork.dll</HintPath>
-    </Reference>
-    <Reference Include="Identityprovider">
-      <HintPath>..\..\Protocol\bin\Identityprovider.dll</HintPath>
-    </Reference>
-    <Reference Include="Lib">
-      <HintPath>..\..\Protocol\bin\Lib.dll</HintPath>
-    </Reference>
-    <Reference Include="Main">
-      <HintPath>..\..\Protocol\bin\Main.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Utils\FStar\fstar-0.6-alpha\bin\FSharp.Compiler.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
-    <Reference Include="Network">
-      <HintPath>..\..\Protocol\bin\Network.dll</HintPath>
-    </Reference>
     <Reference Include="Prims">
       <HintPath>..\..\Protocol\bin\Prims.dll</HintPath>
-    </Reference>
-    <Reference Include="print">
-      <HintPath>..\..\Protocol\bin\print.dll</HintPath>
     </Reference>
     <Reference Include="ProofLib">
       <HintPath>..\..\Protocol\bin\ProofLib.dll</HintPath>
     </Reference>
-    <Reference Include="Protocol">
-      <HintPath>..\..\Protocol\bin\Protocol.dll</HintPath>
-    </Reference>
     <Reference Include="runtime">
-      <HintPath>..\..\..\..\..\Utils\FStar\bin\runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Serviceprovider">
-      <HintPath>..\..\Protocol\bin\Serviceprovider.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Utils\FStar\fstar-0.6-alpha\bin\runtime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
     <Reference Include="X">
       <HintPath>..\..\Protocol\bin\X.dll</HintPath>
-    </Reference>
-    <Reference Include="xServer">
-      <HintPath>..\..\Protocol\bin\xServer.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +63,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RuntimeExtention\RuntimeExtention.fsproj">
-      <Name>RuntimeExtention</Name>
-      <Project>{2137c9dd-cac4-4578-9c79-a08eab373f79}</Project>
+    <ProjectReference Include="..\..\RuntimeExt\RuntimeExt.fsproj">
+      <Name>RuntimeExt</Name>
+      <Project>{8470ecfa-facb-4688-93d8-b06a61757d1e}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

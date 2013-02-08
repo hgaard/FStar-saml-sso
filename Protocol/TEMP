@@ -1,0 +1,56 @@
+TEMP	
+
+
+(*    
+
+let req = Recieve browser in (*3 & 11*)
+	match req with
+	| Get (uri,params,cookies) ->
+    
+    let (msg, sigSP) = GetSamlMessage params in 
+      if hasValidSession cookies then
+         (let subject = GetSessionSubject cookies in
+         let assertion = IssueSamlAssertion me privk msg subject serviceprovider pubksp in
+         let resp = CreateSamlResponse me msg assertion in
+         Send browser resp)
+        else
+          (let challenge = CreateChallenge browser in
+          let challengeMessage = ChallengeMessage challenge in
+          Send browser challengeMessage (*4*))    
+  | _ -> ()
+
+if (VerifySignature serviceprovider pubksp msg sigSP) then
+        (assert (Log serviceprovider msg);
+        
+        (*Check for valid session*) 
+        if hasValidSession cookies then
+        ( let subject = GetSessionSubject cookies in
+          let assertion = IssueSamlAssertion me privk msg subject serviceprovider pubksp 
+          let resp = CreateSamlResponse me msg assertion in
+          Send browser resp)
+        else
+          (let challenge = CreateChallenge browser in
+          let challengeMessage = ChallengeMessage challenge in
+          Send browser challengeMessage (*4*)))
+      else Send(ErrorResponse 403 (getErrorPage 403) [])(*4.1*) (*TODO*)
+
+      Check credentials and challenge
+    if AuthenticateUser user password challenge'
+    then
+      (assert (Log2 user password challenge');
+
+      let samlresponse = CreateSamlResponse me serviceprovider Success in
+      assume(Log me samlresponse);
+      let sigIDP = Sign me privk samlresponse in 
+      let response = SamlProtocolMessage serviceprovider samlresponse sigIDP in
+      Send browser response(*6*))
+    else Send browser (Failed (400))(*6.3*)
+
+  | _ -> Send (ErrorResponse 400 (getErrorPage 400) [])
+
+(*  | _ -> 
+     let samlresponse = CreateSamlResponse me serviceprovider Requester in
+     assume(Log me samlresponse);
+     let sigIDP = Sign me privk samlresponse in
+     let response = SamlProtocolMessage serviceprovider samlresponse sigIDP in
+     Send browser response (*4.1*)*)

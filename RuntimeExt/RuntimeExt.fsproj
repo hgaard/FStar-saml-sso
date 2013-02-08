@@ -5,12 +5,12 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>2137c9dd-cac4-4578-9c79-a08eab373f79</ProjectGuid>
+    <ProjectGuid>8470ecfa-facb-4688-93d8-b06a61757d1e</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>RuntimeExtention</RootNamespace>
-    <AssemblyName>RuntimeExtention</AssemblyName>
+    <RootNamespace>RuntimeExt</RootNamespace>
+    <AssemblyName>RuntimeExt</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <Name>RuntimeExtention</Name>
+    <Name>RuntimeExt</Name>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -21,7 +21,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\RuntimeExtention.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\RuntimeExt.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,7 +30,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\RuntimeExtention.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\RuntimeExt.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
@@ -38,9 +38,7 @@
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
   <ItemGroup>
     <None Include="Script.fsx" />
-    <Compile Include="Saml.fs" />
     <Compile Include="Network.fs" />
-    <Compile Include="Crypto.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -48,22 +46,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Prims">
-      <HintPath>..\..\Protocol\bin\Prims.dll</HintPath>
+      <HintPath>..\..\..\..\..\Utils\FStar\fstar-0.6-alpha\bin\Prims.dll</HintPath>
     </Reference>
-    <Reference Include="Protocol">
-      <HintPath>..\..\Protocol\bin\Protocol.dll</HintPath>
+    <Reference Include="runtime">
+      <HintPath>..\..\..\..\..\Utils\FStar\fstar-0.6-alpha\bin\runtime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\oiosaml.net\src\dk.nita.saml20\dk.nita.saml20\dk.nita.saml20.csproj">
-      <Name>dk.nita.saml20</Name>
-      <Project>{55520059-38bb-48bb-a30e-bfd385293d78}</Project>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

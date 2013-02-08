@@ -6,34 +6,37 @@ open Protocol
 open Saml
 open Crypto
 open Network
+open ContentServer
 
-val identityprovider: me:prin -> pubkey me -> privkey me 
-                      -> browser:prin -> sp:prin -> pubkey sp
-                      -> unit
-let identityprovider me pubk privk browser serviceprovider pubksp =
-	let req = Recieve browser in (*3 & 11*)
-	match req with
-	| Get (prin,uri,params,cookies) ->
-    (*Verify sp signature*)
-    let (msg, sigSP) = GetSamlMessage params in 
-    if VerifySignature serviceprovider pubksp msg sigSP then
-      (assert (Log serviceprovider msg);
-      (*Check for valid session*) 
+(*TODO: 
+  - Make it compile
+  - Encrypt/decrypt
+  - Ensure it follows model*)
 
-      if hasValidSession cookies then
-        let token = GetSamlToken cookies in
-        let resp = CreateSamlResponse me privk serviceprovider pubksp token in
-        Send browser resp
+let CheckSessionAndBuildResponse me privk authReq browser serviceprovider pubksp cookies = 
+        if hasValidSession cookies then
+          let subject = GetSessionSubject cookies in
+          let assertion = IssueSamlAssertion me privk authReq subject serviceprovider pubksp in
+          let resp = CreateSamlResponse me authReq assertion in
+          resp
 
-      else
-        (let challenge = CreateChallenge browser in
-        let challengeMessage = ChallengeMessage challenge in
-        Send browser challengeMessage (*4*)))
-     
-     else Send(ErrorResponse 403 (getErrorPage 403) [])(*4.1*) (*TODO*)
+        else
+          let challenge = GenerateNonce me in
+          let challengeMessage = CreateChallengeMessage me challenge in
+          challengeMessage (*4*)
 
-  | Post (sp, params, cookies) -> 
-    (*Check credentials and challenge*)
+let HandleGetResponse msg me privk browser serviceprovider pubksp cookies =
+match msg with 
+    | SamlAuthnRequestMessage (authReq, sigSP) ->
+      if (VerifySignature serviceprovider pubksp authReq sigSP) then
+        (assert (Log serviceprovider authReq);
+        CheckSessionAndBuildResponse me privk authReq browser serviceprovider pubksp cookies)
+       
+      else ErrorResponse 403 (getErrorPage 403) [] (*4.1*) (*TODO*)
+    | _ -> ErrorResponse 403 (getErrorPage 403) [] (*4.1*) (*TODO*)
+
+let HandlePostResponse = ()
+    (*Check credentials and challenge
     if AuthenticateUser user password challenge'
     then
       (assert (Log2 user password challenge');
@@ -43,13 +46,25 @@ let identityprovider me pubk privk browser serviceprovider pubksp =
       let sigIDP = Sign me privk samlresponse in 
       let response = SamlProtocolMessage serviceprovider samlresponse sigIDP in
       Send browser response(*6*))
-    else Send browser (Failed (400))(*6.3*)
+    else Send browser (Failed (400))(*6.3*)*)
+
+
+val identityprovider: me:prin -> pubkey me -> privkey me 
+                      -> browser:prin -> sp:prin -> pubkey sp
+                      -> unit
+let identityprovider me pubk privk browser serviceprovider pubksp =
+	let req = Recieve browser in (*3 & 11*)
+	match req with
+	| Get (uri, params, cookies) ->
+    let msg = GetSamlMessage params in
+    let resp = HandleGetResponse msg me pubk privk browser serviceprovider pubksp in
+    Send browser resp
+
+  | Post (uri, qparams, fparams, cookies) -> 
+    let params = append qparams fparams in
+    let msg = GetSamlMessage params in
+    let resp = HandlePostResponse msg in
+    Send browser resp    
 
   | _ -> Send (ErrorResponse 400 (getErrorPage 400) [])
 
-  | _ -> 
-     let samlresponse = CreateSamlResponse me serviceprovider Requester in
-     assume(Log me samlresponse);
-     let sigIDP = Sign me privk samlresponse in
-     let response = SamlProtocolMessage serviceprovider samlresponse sigIDP in
-     Send browser response (*4.1*)
