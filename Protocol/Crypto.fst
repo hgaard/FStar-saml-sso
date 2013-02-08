@@ -1,7 +1,18 @@
 module Crypto
 
 open Protocol
+type prin = string
+type pubkey :: prin => *
+type privkey :: prin => *
+type dsig = string
+type nonce = string
 
+(*type pubkey :: * => * =
+    | PublicKey :  prin -> pubkey prin
+*)
+
+(*Verification*)
+type Log :: prin => string => E
 
 val Keygen:  p:prin
           -> (pubkey p * privkey p)
@@ -22,13 +33,16 @@ val VerifySignature: p:prin
 
 val AuthenticateUser: user:string
         -> password:string
-        -> challenge:SessionKey 
-        -> b:bool{b=true ==> Log2 user password challenge}
+        -> challenge:nonce 
+        -> b:bool{b=true ==> Log user challenge}
 
 val GenerateNonce: prin -> nonce (*Add refinement to ensure unqueness*)
 (*val Encrypt: ...
 
 val Decrypt: ...*)
+
+
+
 
 (*Crypto functions*)
 extern reference Crypto {language="F#";

@@ -6,8 +6,6 @@ NETWORK_SRC = Lib.fst Protocol.fst Network.fst x.fst
 
 all: clean dirs protocol
 
-
-
 dirs:
 	mkdir -p queries bin
 
@@ -27,7 +25,7 @@ nw:
 x: 
 	rm -rf bin queries
 	mkdir -p queries bin
-	$(FSTAR) x.fst
+	$(FSTAR) crypto.fst samlprotocol.fst xserver.fst
 
 test:
 	cp $(MY_FSTAR_HOME)/bin/*.dll bin/
