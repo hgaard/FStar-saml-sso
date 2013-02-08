@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"concat",
+				"Concatkv"
+			],
+			[
+				"N",
+				"NETWORK_SRC"
+			],
+			[
 				"me",
 				"message"
 			],
@@ -167,6 +175,65 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "module Identityprovider\n\nopen Lib\nopen SessionManager\nopen Protocol\nopen Saml\nopen Crypto\nopen Network\n\nval identityprovider: me:prin -> pubkey me -> privkey me \n                      -> browser:prin -> sp:prin -> pubkey sp\n                      -> unit\nlet identityprovider me pubk privk browser serviceprovider pubksp =\n	let req = Recieve browser in (*3 & 11*)\n	match req with\n	| Get (prin,uri,params,cookies) ->\n    (*Verify sp signature*)\n    let (msg, sigSP) = GetSamlMessage params in \n    if VerifySignature serviceprovider pubksp msg sigSP then\n      (assert (Log serviceprovider msg);\n      (*Check for valid session*) \n\n      if hasValidSession cookies then\n        let token = GetSamlToken cookies in\n        let resp = CreateSamlResponse me privk serviceprovider pubksp token in\n        Send browser resp\n\n      else\n        (let challenge = CreateChallenge browser in\n        let challengeMessage = ChallengeMessage challenge in\n        Send browser challengeMessage (*4*)))\n     \n     else Send(ErrorResponse 403 (getErrorPage 403) [])(*4.1*) (*TODO*)\n\n  | Post (sp, params, cookies) -> \n    (*Check credentials and challenge*)\n    if AuthenticateUser user password challenge'\n    then\n      (assert (Log2 user password challenge');\n\n      let samlresponse = CreateSamlResponse me serviceprovider Success in\n      assume(Log me samlresponse);\n      let sigIDP = Sign me privk samlresponse in \n      let response = SamlProtocolMessage serviceprovider samlresponse sigIDP in\n      Send browser response(*6*))\n    else Send browser (Failed (400))(*6.3*)\n\n  | _ -> Send (ErrorResponse 400 (getErrorPage 400) [])\n\n  | _ -> \n     let samlresponse = CreateSamlResponse me serviceprovider Requester in\n     assume(Log me samlresponse);\n     let sigIDP = Sign me privk samlresponse in\n     let response = SamlProtocolMessage serviceprovider samlresponse sigIDP in\n     Send browser response (*4.1*)\n",
+			"file": "identityprovider.fst",
+			"file_size": 1959,
+			"file_write_time": 130038787464615327,
+			"settings":
+			{
+				"buffer_size": 1904,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "X.fst",
+			"settings":
+			{
+				"buffer_size": 408,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "xserver.fst",
+			"settings":
+			{
+				"buffer_size": 1368,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 969,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ServiceProvider.fst",
+			"settings":
+			{
+				"buffer_size": 1368,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Network.fst",
+			"settings":
+			{
+				"buffer_size": 1832,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Lib.fst",
+			"settings":
+			{
+				"buffer_size": 1429,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -348,6 +415,9 @@
 	},
 	"file_history":
 	[
+		"/C/Utils/FStar/fstar-0.5-alpha/lib/prims.fst",
+		"/C/Users/jbhq/Speciale/code/StarProtocol/Protocol/basic-example.fst",
+		"/C/Users/jbhq/Speciale/code/StarProtocol/Protocol/Project.sublime-project",
 		"/C/Users/jbhq/SkyDrive/Documents/Coursera-UCJBHQ01/Programming Languages/code/test.sml",
 		"/C/Users/jbhq/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jbhq/AppData/Roaming/Sublime Text 2/Packages/User/Main.sublime-menu",
@@ -472,10 +542,7 @@
 		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Speciale/FStar/fstar-0.5-alpha/examples/healthweb-azure/main.fs",
 		"/C/Speciale/FStar/fstar-0.5-alpha/bin/queries/all.smt",
 		"/C/Speciale/FStar/fstar-0.5-alpha/examples/sessions/Makefile",
-		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Speciale/FStar/fstar-0.5-alpha/examples/healthweb-azure/messages.fine",
-		"/C/Speciale/FStar/fstar-0.5-alpha/src/App.config",
-		"/C/Speciale/FStar/fstar-0.5-alpha/src/dump",
-		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Speciale/FStar/fstar-0.5-alpha/examples/interop/Makefile"
+		"/C/Users/jbhq/SkyDrive/Documents/IT Unitersitetet/Speciale/FStar/fstar-0.5-alpha/examples/healthweb-azure/messages.fine"
 	],
 	"find":
 	{
@@ -599,8 +666,199 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "identityprovider.fst",
+					"settings":
+					{
+						"buffer_size": 1904,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/F#/F#.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "X.fst",
+					"settings":
+					{
+						"buffer_size": 408,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								408,
+								408
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/F#/F#.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "xserver.fst",
+					"settings":
+					{
+						"buffer_size": 1368,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1368,
+								1368
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/F#/F#.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 720.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Makefile",
+					"settings":
+					{
+						"buffer_size": 969,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								705,
+								705
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "ServiceProvider.fst",
+					"settings":
+					{
+						"buffer_size": 1368,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								1368
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/F#/F#.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 138.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Network.fst",
+					"settings":
+					{
+						"buffer_size": 1832,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								486,
+								557
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/F#/F#.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 54.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Lib.fst",
+					"settings":
+					{
+						"buffer_size": 1429,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								737,
+								737
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/F#/F#.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 43.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -657,6 +915,30 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"li",
+				"Lib.fst"
+			],
+			[
+				"n",
+				"Network.fst"
+			],
+			[
+				"mal",
+				"Makefile"
+			],
+			[
+				"se",
+				"ServiceProvider.fst"
+			],
+			[
+				"x",
+				"X.fst"
+			],
+			[
+				"",
+				"basic-example.fst"
+			],
 			[
 				"mai",
 				"main.fs"
