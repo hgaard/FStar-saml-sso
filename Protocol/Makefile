@@ -25,7 +25,7 @@ nw:
 x: 
 	rm -rf bin queries
 	mkdir -p queries bin
-	$(FSTAR) crypto.fst samlprotocol.fst xserver.fst xidentityprovider.fst
+	$(FSTAR) crypto.fst samlprotocol.fst xserver.fst xidentityprovider.fst xmain.fst
 
 test:
 	cp $(MY_FSTAR_HOME)/bin/*.dll bin/

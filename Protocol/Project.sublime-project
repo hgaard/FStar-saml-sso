@@ -2,11 +2,11 @@
 	"folders":
 	[
 		{
-			"path": "/C/Users/jbhq/Speciale/code/StarProtocol/Protocol",
+			"path": "/C/Users/jakob/Speciale/StarProtocol/Protocol",
 			"folder_exclude_patterns": [
             "bin",
             "queries",
-            "%FINE_HOME%"]
+            "%FSTAR_HOME%"]
 		}
 	]
 }
