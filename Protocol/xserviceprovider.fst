@@ -3,8 +3,6 @@ module Serviceprovider
 open SamlProtocol
 open Crypto
 
-
-
 val serviceprovider:  me:prin -> pubkey me -> privkey me ->
                       client:prin -> idp:prin -> pubkey idp -> unit 
 let serviceprovider me pubk privk client idp pubkidp = 

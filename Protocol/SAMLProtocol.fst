@@ -3,6 +3,13 @@ module SamlProtocol
 open Crypto
 (*open Network*)
 
+
+type AuthnRequest = {id:string;  
+                    IssueInstant:string;     
+                    Destination:endpoint;
+                    Issuer:prin}
+
+
 type assertiontoken = string (*Add refinements*)
 type signedtoken = string (*Add refinements*)
 type id = string
