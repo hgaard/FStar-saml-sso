@@ -1,6 +1,6 @@
 module Crypto
 
-type prin = string
+type prin
 type pubkey :: prin => *
 type privkey :: prin => *
 type dsig
@@ -23,8 +23,6 @@ val VerifySignature: p:prin
         -> b:bool{b=true ==> Log p msg}
 end
 
-
-
 module SamlProtocol
 
 open Crypto
@@ -36,8 +34,8 @@ type SamlMessage =
   | AuthnRequest: issuer:prin ->  destination:prin -> message:string -> dsig -> SamlMessage
   | Failed: int -> SamlMessage
 
-val SendSaml: prin -> SamlMessage -> unit
-val ReceiveSaml: prin -> SamlMessage 
+val Send: prin -> SamlMessage -> unit
+val Receive: prin -> SamlMessage 
 
 val CreateAuthnRequestMessage: issuer:prin -> destination:prin -> string
 
@@ -51,12 +49,12 @@ open SamlProtocol
 val serviceprovider:  me:prin -> pubkey me -> privkey me ->
                       client:prin -> idp:prin -> pubkey idp -> unit 
 let serviceprovider me pubk privk client idp pubkidp = 
- let req = ReceiveSaml client in (*1*)
+ let req = Receive client in (*1*)
  match req with
   | Login (url) -> 
     let authnReq = CreateAuthnRequestMessage me idp in
     assume(Log me authnReq);
     let sigSP = Sign me privk authnReq in
     let resp = AuthnRequest me idp authnReq sigSP in 
-    SendSaml client resp (*2*)
-  | _ -> SendSaml client (Failed 400)(*2.1*)
+    Send client resp (*2*)
+  | _ -> Send client (Failed 400)(*2.1*)

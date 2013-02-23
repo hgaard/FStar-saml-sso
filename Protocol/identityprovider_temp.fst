@@ -13,9 +13,8 @@ let handleUserAudhenticated me user client authnrequest =
         let myprivk = CertStore.GetPrivateKey me in
         assume(Log me assertion);
         let sigAs = Sign me myprivk assertion in
-        let signAssertion = AddSignatureToAssertion assertion sigAs in
-        let encryptedAssertion = EncryptAssertion sp pubksp signAssertion in
-        let resp = AuthResponseMessage me sp encryptedAssertion in
+        let signAssertion = SignedAssertion assertion sigAs in
+        let resp = AuthResponseMessage me sp signAssertion in
         SendSaml client resp)
       else
         SendSaml client (Failed Requester)(*10.2*)
