@@ -1,7 +1,6 @@
 module SamlProtocol
 
 open Crypto
-(*open Network*)
 
 type assertiontoken = string (*Add refinements*)
 type signedtoken = string (*Add refinements*)

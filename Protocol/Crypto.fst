@@ -36,8 +36,3 @@ val Decrypt: p:prin
         -> string
 
 val GenerateNonce: prin -> nonce (*Add refinement to ensure unqueness*)
-
-val AuthenticateUser: user:string
-        -> password:string
-        -> challenge:nonce 
-        -> b:bool{b=true ==> Log user challenge}

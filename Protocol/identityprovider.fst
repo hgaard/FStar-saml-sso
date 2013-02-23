@@ -16,7 +16,7 @@ let handleUserAudhenticated me user client authnrequest =
         let signAssertion = AddSignatureToAssertion assertion sigAs in
         let encryptedAssertion = EncryptAssertion sp pubksp signAssertion in
         let resp = AuthResponseMessage me sp encryptedAssertion in
-        SendSaml client resp)
+        SendSaml client resp) (*10*)
       else
         SendSaml client (Failed Requester)(*10.2*)
 
@@ -33,7 +33,6 @@ let rec identityprovider me client =
       SendSaml client resp; (*4*)
       identityprovider me client (*Start over*))
     else
-      (*Send failed saml response*)
       SendSaml client (Failed Requester);(*4.1*)
       identityprovider me client (*Start over*)
 
