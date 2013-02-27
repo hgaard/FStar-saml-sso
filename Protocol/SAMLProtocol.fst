@@ -9,21 +9,15 @@ type endpoint = string
 type uri = string
 
 type AuthnRequest = 
-  | MkAuthnRequest: id:string ->
-                    IssueInstant:string ->
-                    Destination:endpoint ->
-                    Issuer:prin ->
-                    message:string ->
-                    sig:dsig ->
+  | MkAuthnRequest: id:string -> IssueInstant:string ->
+                    Destination:endpoint -> Issuer:prin ->
+                    message:string -> sig:dsig ->
                     AuthnRequest
 
 type LoginData = 
-  | MkLoginData:  user:prin ->
-                  signature:dsig ->
-                  cert:pubkey user ->
-                  challenge:nonce ->
-                  site:string -> 
-                  data:string ->
+  | MkLoginData:  user:prin -> signature:dsig ->
+                  cert:pubkey user -> challenge:nonce ->
+                  site:string -> data:string ->
                   LoginData
 
 type Assertion =

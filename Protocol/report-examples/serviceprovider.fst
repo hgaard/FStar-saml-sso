@@ -1,53 +1,37 @@
-module Crypto
+module Serviceprovider
 
-type prin
-type pubkey :: prin => *
-type privkey :: prin => *
+type principal
+type pubkey :: principal => *
+type privkey :: principal => *
 type dsig
+type uri
+type SamlMessage =
+  | Login: uri -> SamlMessage
+  | AuthnRequest: issuer:principal ->  destination:principal -> message:string -> dsig -> SamlMessage
+  | Failed: int -> SamlMessage
 
-(*Verification*)
-type Log :: prin => string => E
+type Log :: principal => string => E
 
-val Keygen:  p:prin
-          -> (pubkey p * privkey p)
-
-val Sign:  p:prin
+val Send: principal 
+        -> SamlMessage 
+        -> unit
+val Receive: principal 
+        -> SamlMessage 
+val CreateAuthnRequestMessage: issuer:principal 
+        -> destination:principal -> string
+val Sign:  p:principal
         -> privkey p
         -> msg:string{Log p msg}
         -> dsig
-
-val VerifySignature: p:prin
+val VerifySignature: p:principal
         -> pubkey p 
         -> msg:string
         -> dsig
         -> b:bool{b=true ==> Log p msg}
-end
 
-module SamlProtocol
 
-open Crypto
-
-type uri
-
-type SamlMessage =
-  | Login: uri -> SamlMessage
-  | AuthnRequest: issuer:prin ->  destination:prin -> message:string -> dsig -> SamlMessage
-  | Failed: int -> SamlMessage
-
-val Send: prin -> SamlMessage -> unit
-val Receive: prin -> SamlMessage 
-
-val CreateAuthnRequestMessage: issuer:prin -> destination:prin -> string
-
-end
-
-module Serviceprovider
-
-open Crypto
-open SamlProtocol
-
-val serviceprovider:  me:prin -> pubkey me -> privkey me ->
-                      client:prin -> idp:prin -> pubkey idp -> unit 
+val serviceprovider:  me:principal -> pubkey me -> privkey me ->
+                      client:principal -> idp:principal -> pubkey idp -> unit 
 let serviceprovider me pubk privk client idp pubkidp = 
  let req = Receive client in (*1*)
  match req with
