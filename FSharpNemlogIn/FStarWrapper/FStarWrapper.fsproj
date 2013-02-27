@@ -54,7 +54,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
     <Reference Include="X">
-      <HintPath>..\..\Protocol\bin\X.dll</HintPath>
+      <HintPath>..\..\Protocol\interop-experiments\bin\X.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +63,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\RuntimeExt\RuntimeExt.fsproj">
-      <Name>RuntimeExt</Name>
-      <Project>{8470ecfa-facb-4688-93d8-b06a61757d1e}</Project>
+    <ProjectReference Include="..\RuntimeExtention\RuntimeExtention.fsproj">
+      <Name>RuntimeExtention</Name>
+      <Project>{2137c9dd-cac4-4578-9c79-a08eab373f79}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
